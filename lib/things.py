@@ -1,7 +1,7 @@
 import requests
 
-from functions import response
-from functions import errors
+from lib import response
+from lib import errors
 
 
 class Things:

@@ -1,4 +1,4 @@
-from functions import sdk
+from lib import sdk
 
 
 s = sdk.SDK()

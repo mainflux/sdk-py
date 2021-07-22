@@ -1,10 +1,10 @@
-from functions import users
-from functions import things
-from functions import messages
-from functions import channels
-from functions import groups
+from lib import users
+from lib import things
+from lib import messages
+from lib import channels
+from lib import groups
 import requests
-from functions import SDK
+from lib import SDK
 
 
 default_url = "http://localhost"
