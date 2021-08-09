@@ -1,6 +1,5 @@
 from lib import sdk
 
-
 s = sdk.SDK()
 
 msg = "helloMF"

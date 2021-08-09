@@ -2,7 +2,6 @@ from lib import sdk
 
 import json
 
-
 s = sdk.SDK()
 
 channel = {"channel_name": "channel"}
@@ -19,7 +18,6 @@ def test_create_channel(requests_mock):
     r = s.channels.create(channel, token)
     assert r.error.status == 0
     assert channel_id == r.value
-
 
 def test_create_channel_entity_exist(requests_mock):
     requests_mock.register_uri("POST", url + "/channels", headers={"location": "/channels/" + channel_id}, status_code=409)

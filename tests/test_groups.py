@@ -2,7 +2,6 @@ from lib import sdk
 
 import json
 
-
 s = sdk.SDK()
 
 channel_id = "654-559-774"

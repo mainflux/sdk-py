@@ -2,7 +2,6 @@ from lib import sdk
 
 import json
 
-
 s = sdk.SDK()
 
 thing = {"thing_name": "thing"}
