@@ -5,9 +5,9 @@ Python SDK, a python driver for Mainflux HTTP API.
 Does both system administration (provisioning) and messaging.
 
 Installation
-Import "github.com/mainflux/mainflux/sdk/python" in your Python package.
+Import "github.com/mainflux/sdk-py" in your Python package.
 
-import "github.com/mainflux/mainflux/pkg/sdk/python"```
+Import "github.com/mainflux/sdk-py".
 
 Then call SDK Pythong functions to interact with the system.
 
@@ -127,3 +127,4 @@ class Messages:
 
     def read(self, channel_id, token):
         Read - Reads messages from database for a given channel
+```

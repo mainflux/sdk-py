@@ -17,6 +17,7 @@ errors = {
     422: "Database can't process request.",
     500: "Unexpected server-side error occurred.",
 }
+
 users = {
     "create": {
         409: "Failed due to using an existing email address.",
