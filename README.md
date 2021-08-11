@@ -7,8 +7,6 @@ Does both system administration (provisioning) and messaging.
 Installation
 Import "github.com/mainflux/sdk-py" in your Python package.
 
-Import "github.com/mainflux/sdk-py".
-
 Then call SDK Pythong functions to interact with the system.
 
 ## API Reference
