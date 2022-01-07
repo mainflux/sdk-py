@@ -15,14 +15,14 @@ params = None
 
 
 def test_create_thing(requests_mock):
-    requests_mock.register_uri("POST", url + "/things", headers={"location": "/things/" + thing_id}, status_code=201)
+    requests_mock.register_uri("POST", url + "/things/bulk", headers={"location": "/things/" + thing_id}, status_code=201)
     r = s.things.create(thing, token)
     assert r.error.status == 0
     assert thing_id == r.value
 
 
 def test_create_existing_thing(requests_mock):
-    requests_mock.register_uri("POST", url + "/things", headers={"location": "/things/" + thing_id}, status_code=409)
+    requests_mock.register_uri("POST", url + "/things/bulk", headers={"location": "/things/" + thing_id}, status_code=409)
     r = s.things.create(thing, token)
     assert r.error.status == 1
     assert r.error.message == "Entity already exist."
