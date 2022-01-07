@@ -98,3 +98,12 @@ class Groups:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(errors.groups["delete"], http_resp.status_code)
         return mf_resp
+
+    def share_groups(self, token, user_group_id, thing_group_id):
+        '''Adds access rights on thing groups to the user group'''
+        mf_resp = response.Response()
+        http_resp = requests.post(self.url + "/groups/" + user_group_id + "/share", headers={"Authorization": token}, json=thing_group_id)
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(errors.groups["assign"], http_resp.status_code)
+        return mf_resp
