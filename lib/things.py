@@ -11,7 +11,7 @@ class Things:
     def create(self, thing, token):
         '''Creates thing entity in the database'''
         mf_resp = response.Response()
-        http_resp = requests.post(self.url + "/things", json=thing, headers={"Authorization": token})
+        http_resp = requests.post(self.url + "/things/bulk", json=thing, headers={"Authorization": token})
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(errors.things["create"], http_resp.status_code)
