@@ -16,8 +16,7 @@ class Things:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(errors.things["create"], http_resp.status_code)
         else:
-            location = http_resp.headers.get("location")
-            mf_resp.value = location.split('/')[2]
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def create_bulk(self, things, token):
