@@ -9,6 +9,7 @@ members = {"members": channel_id, "type": "channels"}
 group = {"group_name": "group"}
 group_id = "888-888-888"
 group_id1 = "989-787-686"
+thing_group_id = "868-464-262"
 token = "9a8b7c6d5e4f3g21"
 url = "http://localhost"
 
@@ -118,3 +119,9 @@ def test_delete_group_does_not_exist(requests_mock):
     r = s.groups.delete(group_id, token)
     assert r.error.status == 1
     assert r.error.message == "Group does not exist."
+
+def test_share_groups(requests_mock):
+    requests_mock.register_uri("POST", url + "/groups/" + group_id + "/share", status_code=200,
+                               headers={"Authorization": token}, json={"thing_group_id": thing_group_id})
+    r = s.groups.share_groups(token, group_id, thing_group_id)
+    assert r.error.status == 0
