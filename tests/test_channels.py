@@ -112,4 +112,3 @@ def test_check_access_by_id(requests_mock):
     requests_mock.register_uri("POST", url + "/identify/channels/" + channel_id + "/access-by-id", json={"thing_id": thing_id}, status_code=200)
     r = s.channels.check_access_by_id(channel_id, thing_id)
     assert r.error.status == 0
-    assert channel_id == r.value
