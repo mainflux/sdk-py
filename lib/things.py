@@ -119,3 +119,16 @@ class Things:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(errors.things["disconnect"], http_resp.status_code)
         return mf_resp
+
+    def disconnect_things(self, channel_ids, thing_ids, token):
+        '''Disconnect things from channels specified by lists of IDs'''
+        payload = {
+          "thing_ids": thing_ids,
+          "channel_ids": channel_ids,
+        }
+        http_resp = requests.put(self.url + "/disconnect/", headers={"Authorization": token}, json=payload)
+        mf_resp = response.Response()
+        if http_resp.status_code != 204:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(errors.things["delete"], http_resp.status_code)
+        return mf_resp
