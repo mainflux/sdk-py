@@ -1,11 +1,5 @@
-from lib import users
-from lib import things
-from lib import messages
-from lib import channels
-from lib import groups
 import requests
-from lib import SDK
-
+from mainflux import SDK, groups, channels, messages, things, users
 
 default_url = "http://localhost"
 
