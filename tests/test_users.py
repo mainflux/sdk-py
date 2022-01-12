@@ -1,6 +1,6 @@
 from lib import sdk
 
-import json
+import json, requests_mock
 
 s = sdk.SDK()
 user = {"email": "test@email.com", "password": "12345678"}
