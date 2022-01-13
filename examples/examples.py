@@ -1,5 +1,4 @@
-from lib import SDK
-
+from mainflux import SDK
 
 default_url = "http://localhost"
 
