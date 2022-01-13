@@ -116,3 +116,12 @@ class Channels:
             mf_resp.error.message = errors.handle_error(
                 errors.channels["delete"], http_resp.status_code)
         return mf_resp
+
+    def check_access_by_id(self, channel_id, thing_id):
+        '''Checks if thing has access to a channel'''
+        http_resp = requests.post(self.url + "/identify/channels/" + channel_id + "/access-by-id", json=thing_id)
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(errors.channels["delete"], http_resp.status_code)
+        return mf_resp

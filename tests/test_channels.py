@@ -107,3 +107,8 @@ def test_delete_channel_malformed_channel_id(requests_mock):
     r = s.channels.delete(channel_id, token)
     assert r.error.status == 1
     assert r.error.message == "Failed due to malformed channel's ID."
+
+def test_check_access_by_id(requests_mock):
+    requests_mock.register_uri("POST", url + "/identify/channels/" + channel_id + "/access-by-id", json={"thing_id": thing_id}, status_code=200)
+    r = s.channels.check_access_by_id(channel_id, thing_id)
+    assert r.error.status == 0
