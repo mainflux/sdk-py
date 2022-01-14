@@ -36,8 +36,6 @@ def test_get_key_details_missing_token(requests_mock):
     assert r.error.status == 1
     assert r.error.message == "Missing or invalid access token provided."
 
-# curl -isSX DELETE  http://localhost/keys/<key_id> -H 'Authorization: <user_token>'  
-
 def test_revoke(requests_mock):
     requests_mock.register_uri("DELETE", url + "/keys/" + key_id, status_code=204)
     r = s.api.revoke(token, key_id)
