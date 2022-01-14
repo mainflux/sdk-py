@@ -30,8 +30,7 @@ jobs:
         pip install flake8 pytest requests requests_mock coverage
     - name: Lint with flake8
       run: |
-        # Will remove the ignored errors once the respective issues are fixed #30
-        flake8 lib --ignore='E501,E999,E303,E121'
+        flake8 lib
     - name: Test with pytest
       run: |
         pytest tests
