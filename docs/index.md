@@ -3,7 +3,6 @@ Module lib
 
 Sub-modules
 -----------
-* lib.api
 * lib.channels
 * lib.errors
 * lib.groups
