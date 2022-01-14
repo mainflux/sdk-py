@@ -8,6 +8,7 @@ channel = {"channel_name": "channel"}
 channel_id = "123-456-789"
 channel_id1 = "123-223-333"
 thing_id = "332-665-998"
+thing_key = "664-220-886"
 token = "9a8b7c6d5e4f3g21"
 url = "http://localhost"
 params = None
@@ -112,3 +113,9 @@ def test_check_access_by_id(requests_mock):
     requests_mock.register_uri("POST", url + "/identify/channels/" + channel_id + "/access-by-id", json={"thing_id": thing_id}, status_code=200)
     r = s.channels.check_access_by_id(channel_id, thing_id)
     assert r.error.status == 0
+
+def test_identify_thing(requests_mock):
+    requests_mock.register_uri("POST", url + "/identify", json=thing_key, status_code=200)
+    r = s.channels.identify_thing(thing_key)
+    assert r.error.status == 0
+    assert thing_key == r.value
