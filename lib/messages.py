@@ -12,10 +12,12 @@ class Messages:
         '''Sends message via HTTP protocol'''
         url = self.url + "/http/channels/" + channel_id + '/messages'
         mf_resp = response.Response()
-        http_resp = requests.post(url, json=msg, headers={"Authorization": token})
+        http_resp = requests.post(url, json=msg, headers={
+                                  "Authorization": token})
         if http_resp.status_code != 202:
             mf_resp.error.status = 1
-            mf_resp.error.message = errors.handle_error(errors.messages["send"], http_resp.status_code)
+            mf_resp.error.message = errors.handle_error(
+                errors.messages["send"], http_resp.status_code)
         return mf_resp
 
     def read(self, channel_id, token):
@@ -25,7 +27,8 @@ class Messages:
         http_resp = requests.get(url, headers={"Authorization": token})
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
-            mf_resp.error.message = errors.handle_error(errors.messages["read"], http_resp.status_code)
+            mf_resp.error.message = errors.handle_error(
+                errors.messages["read"], http_resp.status_code)
         else:
             mf_resp.value = http_resp.json()
         return mf_resp

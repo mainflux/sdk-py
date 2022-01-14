@@ -1,6 +1,6 @@
 from lib import sdk
 
-import json
+import json, requests_mock
 
 s = sdk.SDK()
 
@@ -135,3 +135,14 @@ def test_disconnect_thing_or_channel_does_not_exist(requests_mock):
     r = s.things.disconnect(channel_id, thing_id, token)
     assert r.error.status == 1
     assert r.error.message == "Channel or thing does not exist."
+
+def test_disconnect_things(requests_mock):
+    requests_mock.register_uri("PUT", url + "/disconnect/", status_code=200)
+    r = s.things.disconnect_things([channel_id], [thing_id, thing_id1], token)
+    assert r.error.status == 1
+
+def test_disconnect_things_bad_json(requests_mock):
+    requests_mock.register_uri("PUT", url + "/disconnect/", status_code=400)
+    r = s.things.disconnect_things([channel_id], [thing_id, thing_id1], token)
+    assert r.error.status == 1
+    assert r.error.message == "Failed due to malformed thing's ID."
