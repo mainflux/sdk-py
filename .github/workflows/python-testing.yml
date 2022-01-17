@@ -37,7 +37,7 @@ jobs:
         coverage run --source=lib -m pytest -v tests && coverage report -m
     - name: Check api docs
       run: |
-        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output_path="tmp/docs" lib
+        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
         DOCS=docs/*.md
         for filename in $DOCS; do
           echo "Comparing $filename with tmp/$filename"
