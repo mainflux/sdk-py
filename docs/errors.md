@@ -1,9 +1,38 @@
-Module lib.errors
-=================
+<!-- markdownlint-disable -->
 
-Functions
----------
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/errors.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-    
-`handle_error(error_dict, status_code)`
-:
+# <kbd>module</kbd> `errors`
+
+
+
+
+**Global Variables**
+---------------
+- **errors**
+- **users**
+- **things**
+- **channels**
+- **messages**
+- **groups**
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/errors.py#L1"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+## <kbd>function</kbd> `handle_error`
+
+```python
+handle_error(error_dict, status_code)
+```
+
+
+
+
+
+
+
+
+---
+
+_This file was automatically generated via [lazydocs](https://github.com/ml-tooling/lazydocs)._
