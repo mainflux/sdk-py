@@ -4,7 +4,7 @@ from lib import response
 from lib import errors
 
 
-class Api:
+class Keys:
     def __init__(self, url):
         self.url = url
 
