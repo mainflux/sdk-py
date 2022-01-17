@@ -130,3 +130,15 @@ class Channels:
                 errors.channels["delete"], http_resp.status_code
             )
         return mf_resp
+
+    def identify_thing(self, thing_key):
+        '''Validates thing's key and returns it's ID if key is valid'''
+        http_resp = requests.post(self.url + "/identify", json=thing_key)
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.channels["get_by_thing"], http_resp.status_code)
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
