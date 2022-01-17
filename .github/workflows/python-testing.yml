@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest requests requests_mock coverage lazydocs
+        pip install flake8 pytest requests requests_mock coverage
     - name: Lint with flake8
       run: |
         flake8 lib
