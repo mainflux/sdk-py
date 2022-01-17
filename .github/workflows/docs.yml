@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install lazydocs
+        pip install lazydocs requests
     - name: Check api docs
       run: |
         lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
