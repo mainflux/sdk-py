@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest requests requests_mock coverage
+        pip install flake8 pytest requests requests_mock coverage lazydocs
     - name: Lint with flake8
       run: |
         flake8 lib
@@ -37,7 +37,6 @@ jobs:
         coverage run --source=lib -m pytest -v tests && coverage report -m
     - name: Check api docs
       run: |
-        pip3 install lazydocs
         lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output_path="tmp/docs" lib
         DOCS=docs/*.md
         for filename in $DOCS; do
