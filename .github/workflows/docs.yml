@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ main ]
 
-name: Testing
+name: Check SDK documentation
 
 jobs:
   build:
@@ -15,8 +15,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
-        os: [windows-2022, windows-2019, ubuntu-18.04, ubuntu-20.04, macos-10.15, macos-11]
+        python-version: [3.7, 3.8]
+        os: [windows-2022, ubuntu-20.04, macos-11]
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -27,11 +27,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest requests requests_mock coverage lazydocs
-    - name: Lint with flake8
+        pip install lazydocs
+    - name: Check api docs
       run: |
-        flake8 lib
-    - name: Test with pytest
-      run: |
-        pytest tests
-        coverage run --source=lib -m pytest -v tests && coverage report -m
+        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
+        DOCS=docs/*.md
+        for filename in $DOCS; do
+          echo "Comparing $filename with tmp/$filename"
+          if ! cmp -b $filename tmp/$filename; then
+                echo "Docs for $filename are out of sync!"
+              exit 1
+            fi
+        done
