@@ -17,14 +17,14 @@ class SDK:
         things_url=default_url,
         messages_url=default_url,
         groups_url=default_url,
-        api_url=default_url
+        keys_url=default_url
     ):
         self.users = users.Users(users_url)
         self.things = things.Things(things_url)
         self.messages = messages.Messages(messages_url)
         self.channels = channels.Channels(things_url)
         self.groups = groups.Groups(groups_url)
-        self.api = api.Keys(api_url)
+        self.api = api.Keys(keys_url)
         self.version_url = things_url
 
     def version(self):
