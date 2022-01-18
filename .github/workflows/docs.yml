@@ -1,0 +1,38 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+name: Check SDK documentation
+
+jobs:
+  build:
+    name: Checks if the SDK docs is updated
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install lazydocs requests
+    - name: Check api docs
+      run: |
+        python3 setup.py install
+        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
+        DOCS=docs/*.md
+        for filename in $DOCS; do
+          echo "Comparing $filename with tmp/$filename"
+          if ! cmp -b $filename tmp/$filename; then
+                echo "Docs for $filename are out of sync!"
+              exit 1
+            fi
+        done
