@@ -24,7 +24,7 @@ class SDK:
         self.messages = messages.Messages(messages_url)
         self.channels = channels.Channels(things_url)
         self.groups = groups.Groups(groups_url)
-        self.api = api.Keys(keys_url)
+        self.keys = api.Keys(keys_url)
         self.version_url = things_url
 
     def version(self):
