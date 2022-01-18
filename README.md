@@ -2,8 +2,6 @@
 
 [![Testing](https://github.com/mainflux/sdk-py/actions/workflows/python-testing.yml/badge.svg?branch=main)](https://github.com/mainflux/sdk-py/actions/workflows/python-testing.yml)
 [![Check SDK documentation](https://github.com/mainflux/sdk-py/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/mainflux/sdk-py/actions/workflows/docs.yml)
-[![license][license]](LICENSE)
-[![chat][gitter-badge]](https://gitter.im/mainflux/mainflux?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is the Mainflux Python SDK, a python driver for [Mainflux HTTP API](https://docs.mainflux.io/api/) API reference in the Swagger UI can be found [here](https://api.mainflux.io/).
 
