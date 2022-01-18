@@ -30,6 +30,7 @@ jobs:
         pip install lazydocs requests
     - name: Check api docs
       run: |
+        python3 setup.py install
         lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
         DOCS=docs/*.md
         for filename in $DOCS; do
