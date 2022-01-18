@@ -133,6 +133,18 @@ Gets all channels to which a specific thing is connected to
 
 ---
 
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/channels.py#L134"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `identify_thing`
+
+```python
+identify_thing(thing_key)
+```
+
+Validates thing's key and returns it's ID if key is valid 
+
+---
+
 <a href="https://github.com/mainflux/sdk-py/blob/main/lib/channels.py#L95"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
