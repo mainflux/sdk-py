@@ -14,14 +14,14 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L12"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L13"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `SDK`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L13"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
@@ -30,7 +30,8 @@ __init__(
     users_url='http://localhost',
     things_url='http://localhost',
     messages_url='http://localhost',
-    groups_url='http://localhost'
+    groups_url='http://localhost',
+    keys_url='http://localhost'
 )
 ```
 
@@ -43,7 +44,7 @@ __init__(
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L27"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/lib/sdk.py#L30"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `version`
 

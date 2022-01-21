@@ -4,6 +4,7 @@
 
 ## Modules
 
+- [`api`](./api.md#module-api)
 - [`channels`](./channels.md#module-channels)
 - [`errors`](./errors.md#module-errors)
 - [`groups`](./groups.md#module-groups)
@@ -15,6 +16,7 @@
 
 ## Classes
 
+- [`api.Keys`](./api.md#class-keys)
 - [`channels.Channels`](./channels.md#class-channels)
 - [`groups.Groups`](./groups.md#class-groups)
 - [`messages.Messages`](./messages.md#class-messages)
