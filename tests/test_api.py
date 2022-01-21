@@ -17,7 +17,6 @@ def test_create(requests_mock):
     assert r.error.status == 0
     assert token == r.value
 
-
 def test_create_existing_key(requests_mock):
     requests_mock.register_uri("POST", url + "/keys", status_code=409)
     r = s.keys.create(token, duration_params)
@@ -40,7 +39,6 @@ def test_revoke(requests_mock):
     requests_mock.register_uri("DELETE", url + "/keys/" + key_id, status_code=204)
     r = s.keys.revoke(token, key_id)
     assert r.error.status == 0
-
 
 def test_revoke_bad_key(requests_mock):
     requests_mock.register_uri("DELETE", url + "/keys/" + key_id, status_code=403)
