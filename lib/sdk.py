@@ -3,6 +3,7 @@ from lib import things
 from lib import messages
 from lib import channels
 from lib import groups
+from lib import api
 
 import requests
 
@@ -15,13 +16,15 @@ class SDK:
         users_url=default_url,
         things_url=default_url,
         messages_url=default_url,
-        groups_url=default_url
+        groups_url=default_url,
+        keys_url=default_url
     ):
         self.users = users.Users(users_url)
         self.things = things.Things(things_url)
         self.messages = messages.Messages(messages_url)
         self.channels = channels.Channels(things_url)
         self.groups = groups.Groups(groups_url)
+        self.keys = api.Keys(keys_url)
         self.version_url = things_url
 
     def version(self):
