@@ -30,8 +30,8 @@ jobs:
         pip install flake8 pytest requests requests_mock coverage
     - name: Lint with flake8
       run: |
-        flake8 lib
+        flake8 mainflux examples --count --exit-zero --max-complexity=10 --max-line-length=80 --statistics
     - name: Test with pytest
       run: |
         pytest tests
-        coverage run --source=lib -m pytest -v tests && coverage report -m
+        coverage run --source=mainflux -m pytest -v tests && coverage report -m

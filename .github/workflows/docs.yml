@@ -27,7 +27,7 @@ jobs:
     - name: Check api docs
       run: |
         python3 setup.py install
-        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" lib
+        lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" --output-path="tmp/docs" mainflux
         DOCS=docs/*.md
         for filename in $DOCS; do
           echo "Comparing $filename with tmp/$filename"
