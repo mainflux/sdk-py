@@ -1,4 +1,4 @@
-from lib import sdk
+from mainflux import sdk
 
 s = sdk.SDK()
 
@@ -9,13 +9,13 @@ channel_id = "224-335-668"
 
 
 def test_send(requests_mock):
-    requests_mock.register_uri("POST", url + "/http/channels/" + channel_id + "/messages", status_code=202)
-    r = s.messages.send(channel_id, msg, token)
+    requests_mock.register_uri("POST", url + "/http/channels/" + channel_id + "/messages/", status_code=202)
+    r = s.messages.send(channel_id=channel_id, msg=msg, thing_key=token)
     assert r.error.status == 0
 
 
 def test_read(requests_mock):
     requests_mock.register_uri("GET", url + "/channels/" + channel_id + "/messages", json=msg, status_code=200)
-    r = s.messages.read(channel_id, token)
+    r = s.messages.read(channel_id=channel_id, token=token)
     assert r.error.status == 0
     assert msg == r.value
