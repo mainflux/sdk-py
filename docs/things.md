@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 # <kbd>module</kbd> `things`
 
@@ -11,19 +11,19 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L7"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Things`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
 ```python
-__init__(url)
+__init__(url: str)
 ```
 
 
@@ -35,134 +35,132 @@ __init__(url)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L117"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L165"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `connect`
 
 ```python
-connect(channel_ids, thing_ids, token)
+connect(thing_id: str, channel_id: str, token: str)
 ```
 
 Connects thing and channel 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L54"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L131"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-### <kbd>method</kbd> `construct_query`
+### <kbd>method</kbd> `connects`
 
 ```python
-construct_query(params)
+connects(thing_ids: list, channel_ids: list, token: str)
 ```
 
-
-
-
+Connects thing and channel 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L11"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L17"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
 ```python
-create(thing, token)
+create(thing: dict, token: str)
 ```
 
 Creates thing entity in the database 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L25"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L35"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create_bulk`
 
 ```python
-create_bulk(things, token)
+create_bulk(things: list, token: str)
 ```
 
 Creates multiple things in a bulk 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L106"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L117"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `delete`
 
 ```python
-delete(thing_id, token)
+delete(thing_id: str, token: str)
 ```
 
 Deletes a thing entity from database 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L137"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L181"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disconnect`
 
 ```python
-disconnect(channel_ids, thing_ids, token)
+disconnect(thing_id: str, channel_id: str, token: str)
 ```
 
 Disconnect thing and channel 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L150"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L149"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-### <kbd>method</kbd> `disconnect_things`
+### <kbd>method</kbd> `disconnects`
 
 ```python
-disconnect_things(channel_ids, thing_ids, token)
+disconnects(thing_ids: list, channel_ids: list, token: str)
 ```
 
-Disconnect things from channels specified by lists of IDs 
+Disconnect thing and channel 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L41"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L52"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get`
 
 ```python
-get(thing_id, token)
+get(thing_id: str, token: str)
 ```
 
 Gets a thing entity for a logged-in user 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L64"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L68"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_all`
 
 ```python
-get_all(token, query_params=None)
+get_all(query_params: dict, token: str)
 ```
 
 Gets all things from database 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L78"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L85"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_by_channel`
 
 ```python
-get_by_channel(channel_id, params, token)
+get_by_channel(channel_id: str, query_params: dict, token: str)
 ```
 
 Gets all things to which a specific thing is connected to 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/things.py#L92"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L102"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
 ```python
-update(thing_id, token, thing)
+update(thing_id: str, thing: dict, token: str)
 ```
 
 Updates thing entity 

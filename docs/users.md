@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 # <kbd>module</kbd> `users`
 
@@ -11,19 +11,19 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L9"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Users`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L9"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L12"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
 ```python
-__init__(url)
+__init__(url: str)
 ```
 
 
@@ -35,72 +35,96 @@ __init__(url)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L12"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L15"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
 ```python
-create(user)
+create(user: dict)
 ```
 
-Creates user entity in the database 
+Registers new user account given email and password. New account will be uniquely identified by its email address. 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L37"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L124"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `disable`
+
+```python
+disable(user_id: str, admin_token: str)
+```
+
+Disables an enabled user account for a given user ID. 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L110"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `enable`
+
+```python
+enable(user_id: str, admin_token: str)
+```
+
+Enables a disabled user account for a given user ID. 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L43"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get`
 
 ```python
-get(user_id, token)
+get(user_id: str, token: str)
 ```
 
-Gets a user entity for a logged-in user 
+Gets a user information 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L50"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L59"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_all`
 
 ```python
-get_all(token)
+get_all(query_params: dict, admin_token: str)
 ```
 
-Gets all users from database 
+Retrieves a list of users 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L25"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L30"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `login`
 
 ```python
-login(user)
+login(user: dict)
 ```
 
-Creates a user token 
+Generates an access token when provided with proper credentials. 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L63"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L76"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
 ```python
-update(user, token)
+update(user: dict, user_token: str)
 ```
 
-Updates user entity 
+Updates info on currently logged in user. Info is updated using authorization user_token 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/users.py#L77"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L92"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_password`
 
 ```python
-update_password(old_password, password, token)
+update_password(old_password: str, password: str, user_token: str)
 ```
 
 Changes user password 
