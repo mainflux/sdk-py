@@ -34,8 +34,11 @@ users = {
     "update": {
         404: "Failed due to non existing user.",
     },
-    "update_password": {
-
+    "enable": {
+        404: "Failed due to non existing user."
+    },
+    "disable": {
+        404: "Failed due to non existing user."
     },
 }
 
@@ -138,5 +141,32 @@ groups = {
     "delete": {
         400: "Failed due to malformed query parameters.",
         404: "Group does not exist.",
+    },
+}
+
+boostrap = {
+    "view": {
+        404: "Config does not exist.",
+    },
+    "whitelist": {
+        204: "Config removed.",
+        400: "Failed due to malformed config's ID.",
+    },
+    "update": {
+        404: "Config does not exist.",
+    },
+    "boostrap": {
+        404: "Failed to retrieve corresponding config."
+    }
+}
+certs = {
+    "view": {
+        404: "Failed to retrieve corresponding certificate.",
+    },
+    "revoke": {
+        404: "Failed to revoke corresponding certificate.",
+    },
+    "serials": {
+        404: "Failed to retrieve corresponding certificates.",
     },
 }
