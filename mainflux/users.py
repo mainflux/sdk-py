@@ -23,21 +23,20 @@ class Users:
                 errors.users["create"], http_resp.status_code
             )
         else:
-            location = http_resp.headers.get("location")
-            mf_resp.value = location.split("/")[2]
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def login(self, user: dict):
         """Generates an access token when provided with proper credentials."""
         mf_resp = response.Response()
-        http_resp = requests.post(self.url + "/tokens", json=user)
+        http_resp = requests.post(self.url + "/users/tokens/issue", json=user)
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.users["login"], http_resp.status_code
             )
         else:
-            mf_resp.value = http_resp.json()["token"]
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def get(self, user_id: str, token: str):
