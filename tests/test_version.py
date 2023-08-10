@@ -1,4 +1,4 @@
-from lib import sdk
+from mainflux import sdk
 
 import json, requests_mock
 

@@ -1,6 +1,6 @@
 <!-- markdownlint-disable -->
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/errors.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/errors.py#L0"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 # <kbd>module</kbd> `errors`
 
@@ -15,10 +15,12 @@
 - **channels**
 - **messages**
 - **groups**
+- **boostrap**
+- **certs**
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/lib/errors.py#L1"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/errors.py#L1"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>function</kbd> `handle_error`
 
