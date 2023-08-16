@@ -25,8 +25,7 @@ class Groups:
                 errors.groups["create"], http_resp.status_code
             )
         else:
-            location = http_resp.headers.get("location")
-            mf_resp.value = location.split("/")[2]
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def get(self, group_id: str, token: str):
@@ -86,7 +85,7 @@ class Groups:
         mf_resp = response.Response()
         http_resp = requests.get(
             self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "children",
+            "/children",
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -112,6 +111,8 @@ class Groups:
             mf_resp.error.message = errors.handle_error(
                 errors.groups["update"], http_resp.status_code
             )
+        else:
+             mf_resp.value = http_resp.json()
         return mf_resp
 
     def members(self, group_id: str, query_params: dict, token: str):
@@ -179,17 +180,17 @@ class Groups:
             )
         return mf_resp
 
-    def delete(self, group_id: str, token: str):
-        """Deletes a group entity from database"""
-        http_resp = requests.delete(
-            self.url + "/" + self.groups_endpoint + "/" + group_id,
-            headers=utils.construct_header(token, utils.CTJSON),
+    def disable(self, group_id: str, user_token: str):
+        """Disables a group entity from database"""
+        http_resp = requests.post(
+            self.url + "/" + self.groups_endpoint + "/" + group_id + "/disable",
+            headers=utils.construct_header(user_token, utils.CTJSON),
         )
         mf_resp = response.Response()
-        if http_resp.status_code != 204:
+        if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.groups["delete"], http_resp.status_code
+                errors.groups["disable"], http_resp.status_code
             )
         return mf_resp
 

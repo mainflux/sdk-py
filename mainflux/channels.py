@@ -3,6 +3,7 @@ import requests
 from mainflux import response
 from mainflux import errors
 from mainflux import utils
+from mainflux import things
 
 
 class Channels:
@@ -27,8 +28,7 @@ class Channels:
                 errors.channels["create"], http_resp.status_code
             )
         else:
-            location = http_resp.headers.get("location")
-            mf_resp.value = location.split("/")[2]
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def create_bulk(self, channels: list, token: str):
@@ -66,12 +66,11 @@ class Channels:
 
     def get_all(self, query_params: dict, token: str):
         """Gets all channels from database"""
-        url = self.url + "/" + self.channels_endpoint
         mf_resp = response.Response()
         http_resp = requests.get(
-            url,
+            self.url + "/" + self.channels_endpoint,
             headers=utils.construct_header(token, utils.CTJSON),
-            params=query_params
+            params=query_params,
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -86,13 +85,7 @@ class Channels:
         """Gets all channels to which a specific thing is connected to"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url
-            + "/"
-            + self.things_endpoint
-            + "/"
-            + thing_id
-            + "/"
-            + self.channels_endpoint,
+            self.url + "/" + self.things_endpoint + "/" + thing_id + "/" + self.channels_endpoint,
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -120,14 +113,15 @@ class Channels:
             )
         return mf_resp
 
-    def delete(self, channel_id: str, token: str):
+    def disable(self, channel_id: str, token: str):
         """Deletes a channel entity from database"""
-        http_resp = requests.delete(
-            self.url + "/" + self.channels_endpoint + "/" + channel_id,
+        http_resp = requests.post(
+            self.url + "/" + self.channels_endpoint + "/" + channel_id + "/disable",
             headers=utils.construct_header(token, utils.CTJSON),
         )
+        print(http_resp.request.url)
         mf_resp = response.Response()
-        if http_resp.status_code != 204:
+        if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.channels["delete"], http_resp.status_code
@@ -137,8 +131,10 @@ class Channels:
     def identify_thing(self, thing_key: str):
         """Validates thing's key and returns it's ID if key is valid"""
         http_resp = requests.post(
-            self.url + "/" + self.identify_endpoint, json={"token": thing_key}
+            self.url + "/" + self.identify_endpoint,
+            headers=utils.construct_header(utils.ThingPrefix + thing_key, utils.CTJSON),
         )
+        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1

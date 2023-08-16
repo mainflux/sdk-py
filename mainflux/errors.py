@@ -20,7 +20,7 @@ errors = {
 
 users = {
     "create": {
-        409: "Failed due to using an existing email address.",
+        409: "Failed due to using an existing identity.",
     },
     "login": {
         409: "Failed due to using an existing email address.",
@@ -66,7 +66,7 @@ things = {
         400: "Failed due to malformed thing's ID.",
     },
     "connect": {
-
+        400: "A non-existent entity request."
     },
     "disconnect": {
         400: "Failed due to malformed query parameters.",

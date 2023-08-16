@@ -3,32 +3,94 @@ from mainflux import sdk
 import json, requests_mock
 
 s = sdk.SDK()
-user = {"email": "test@email.com", "password": "12345678"}
-user1 = {"email": "test1@email.com", "password": "12345678"}
-user2 = {"email": "test2@email.com", "password": "12345678"}
-old_password = {"old_password": "12345678"}
-password = {"password": "dsa"}
+user = {
+  "id": "bb7edb32-2eac-4aad-aebe-ed96fe073879",
+  "name": "userName",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "owner": "aa68f94c-de36-48dd-9c53-d8ac8b12d86b",
+  "credentials": {
+    "identity": "test@email.com"
+  },
+  "metadata": {
+    "domain": "example.com"
+  },
+  "status": "enabled",
+  "created_at": "2019-11-26 13:31:52",
+  "updated_at": "2019-11-26 13:31:52"
+}
+user1 = {
+  "id": "1d36ac54-9bb7-4079-a46b-63c34f7fc678",
+  "name": "userName1",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "owner": "aa68f94c-de36-48dd-9c53-d8ac8b12d86b",
+  "credentials": {
+    "identity": "test1@email.com"
+  },
+  "metadata": {
+    "domain": "example.com"
+  },
+  "status": "enabled",
+  "created_at": "2019-11-26 13:31:52",
+  "updated_at": "2019-11-26 13:31:52"
+}
+
+user2 = {
+  "id": "e2c769b8-8b8c-4886-8b19-e155c4d363e6",
+  "name": "userName",
+  "tags": [
+    "tag1",
+    "tag2"
+  ],
+  "owner": "aa68f94c-de36-48dd-9c53-d8ac8b12d86b",
+  "credentials": {
+    "identity": "test2@email.com"
+  },
+  "metadata": {
+    "domain": "example.com"
+  },
+  "status": "enabled",
+  "created_at": "2019-11-26 13:31:52",
+  "updated_at": "2019-11-26 13:31:52"
+}
+old_secret = {"old_secret": "12345678"}
+new_secret = {"new_secret": "dsa"}
 user_id = "123-456"
-token = "9a8b7c6d5e4f3g21"
+token = {
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+  "access_type": "access"
+}
 url = "http://localhost"
 
 
 def test_create_user(requests_mock):
-    requests_mock.register_uri("POST", url + "/users", headers={"location": "/users/" + user_id}, status_code=201)
+    requests_mock.register_uri("POST", url + "/users", headers={"location": "/users/" + user_id}, json=user, status_code=201)
     r = s.users.create(user=user)
     assert r.error.status == 0
-    assert user_id == r.value
+    assert user == r.value
 
-
+def test_create_user_bad_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/users", headers={"location": "/users/" + user_id}, status_code=409)
+    r = s.users.create(user=user)
+    assert r.error.status == 1
+    assert r.error.message == "Failed due to using an existing identity."
+    
+    
 def test_login_user(requests_mock):
-    requests_mock.register_uri("POST", url + "/tokens", json={"token": token}, status_code=201)
+    requests_mock.register_uri("POST", url + "/users/tokens/issue", json=token, status_code=201)
     r = s.users.login(user=user)
     assert r.error.status == 0
     assert token == r.value
 
 
 def test_login_user_bad_email(requests_mock):
-    requests_mock.register_uri("POST", url + "/tokens", status_code=409)
+    requests_mock.register_uri("POST", url + "/users/tokens/issue", status_code=409)
     r = s.users.login(user=user)
     assert r.error.status == 1
     assert r.error.message == "Failed due to using an existing email address."
@@ -36,53 +98,77 @@ def test_login_user_bad_email(requests_mock):
 
 def test_get_user(requests_mock):
     requests_mock.register_uri("GET", url + "/users/" + user_id, json=user, status_code=200)
-    r = s.users.get(user_id=user_id, token=token)
+    r = s.users.get(user_id=user_id, token=token["access_token"])
     assert r.error.status == 0
     assert user == r.value
 
 
 def test_get_user_bad_token(requests_mock):
     requests_mock.register_uri("GET", url + "/users/" + user_id, json=user, status_code=401)
-    r = s.users.get(user_id=user_id, token=token)
+    r = s.users.get(user_id=user_id, token=token["access_token"])
     assert r.error.status == 1
     assert r.error.message == "Missing or invalid access token provided."
 
 
 def test_get_all_users(requests_mock):
     requests_mock.register_uri("GET", url + "/users", json=[user, user2], status_code=200)
-    r = s.users.get_all(admin_token=token, query_params=None)
+    r = s.users.get_all(query_params=None, user_token=token["access_token"])
     assert r.error.status == 0
     assert [user, user2] == r.value
 
 
 def test_get_all_user_bad_request(requests_mock):
     requests_mock.register_uri("GET", url + "/users" , json=user, status_code=422)
-    r = s.users.get_all(admin_token=token, query_params=None)
+    r = s.users.get_all(query_params=None, user_token=token["access_token"])
     assert r.error.status == 1
     assert r.error.message == "Database can't process request."
 
 
 def test_update_user(requests_mock):
-    requests_mock.register_uri("PUT", url + "/users", json=json.dumps(user1), status_code=200)
-    r = s.users.update(user=user, user_token=token)
+    requests_mock.register_uri("PATCH", url + "/users/" + user["id"], json=user, status_code=200)
+    r = s.users.update(user=user, user_token=token["access_token"])
     assert r.error.status == 0
 
 
 def test_non_existing_user_update(requests_mock):
-    requests_mock.register_uri("PUT", url + "/users", json=json.dumps(user1), status_code=404)
-    r = s.users.update(user=user, user_token=token)
+    requests_mock.register_uri("PATCH",url + "/users/" + user["id"], json=user, status_code=404)
+    r = s.users.update(user=user, user_token=token["access_token"])
     assert r.error.status == 1
     assert r.error.message == "Failed due to non existing user."
 
 
 def test_update_user_password(requests_mock):
-    requests_mock.register_uri("PATCH", url + "/password", status_code=201)
-    r = s.users.update_password(old_password=old_password, password=password, user_token=token)
+    requests_mock.register_uri("PATCH", url + "/users" + "/secret", status_code=200)
+    r = s.users.update_password(old_secret=old_secret, new_secret=new_secret, user_token=token["access_token"])
     assert r.error.status == 0
 
 
 def test_update_user_password_bad_token(requests_mock):
-    requests_mock.register_uri("PATCH", url + "/password", status_code=415)
-    r = s.users.update_password(old_password=old_password, password=password, user_token=token)
+    requests_mock.register_uri("PATCH",url + "/users" + "/secret", status_code=415)
+    r = s.users.update_password(old_secret=old_secret, new_secret=new_secret, user_token=token["access_token"])
     assert r.error.status == 1
     assert r.error.message == "Missing or invalid content type."
+
+def test_enable_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/enable", json=user, status_code=204)
+    r = s.users.enable(user_id=user["id"], user_token= token["access_token"])
+    assert r.error.status == 0
+    assert user == r.value 
+    
+def test_disable_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/disable", json=user, status_code=200)
+    r = s.users.disable(user_id=user["id"], user_token= token["access_token"])
+    assert r.error.status == 0
+    assert user == r.value  
+    
+def test_enable_user_bad_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/enable", json=user, status_code=404)
+    r = s.users.enable(user_id=user["id"], user_token= token["access_token"])
+    assert r.error.status == 1
+    assert r.error.message == "Failed due to non existing user."
+    
+def test_disable_user_bad_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/disable", json=user, status_code=404)
+    r = s.users.disable(user_id=user["id"], user_token= token["access_token"])
+    assert r.error.status == 1
+    assert r.error.message == "Failed due to non existing user."

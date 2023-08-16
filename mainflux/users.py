@@ -59,11 +59,11 @@ class Users:
             mf_resp.value = http_resp.json()
         return mf_resp
 
-    def get_all(self, query_params: dict, admin_token: str):
+    def get_all(self, query_params: dict, user_token: str):
         """Retrieves a list of users"""
         http_resp = requests.get(
             self.URL + "/" + self.USERS_ENDPOINT,
-            headers=utils.construct_header(admin_token, utils.CTJSON),
+            headers=utils.construct_header(user_token, utils.CTJSON),
             params=query_params,
         )
         mf_resp = response.Response()
