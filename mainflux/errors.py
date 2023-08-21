@@ -160,7 +160,13 @@ boostrap = {
     }
 }
 certs = {
-    "view": {
+    "issue": {
+        401: "Missing or invalid access token provided.",
+    },
+    "view_by_thing": {
+        404: "Failed to retrieve corresponding certificate.",
+    },
+    "view_by_serial": {
         404: "Failed to retrieve corresponding certificate.",
     },
     "revoke": {
