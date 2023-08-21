@@ -40,7 +40,7 @@ __init__(url: str)
 ### <kbd>method</kbd> `issue`
 
 ```python
-issue(thing_id: str, key_bits: int, key_type: str, valid: str, token: str)
+issue(thing_id: str, valid: str, token: str)
 ```
 
 
@@ -49,7 +49,7 @@ issue(thing_id: str, key_bits: int, key_type: str, valid: str, token: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L55"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L68"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `revoke`
 
@@ -63,15 +63,27 @@ revoke(thing_id: str, token: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L41"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L51"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-### <kbd>method</kbd> `view`
+### <kbd>method</kbd> `view_by_serial`
 
 ```python
-view(thing_id: str, token: str)
+view_by_serial(cert_id: str, token: str)
 ```
 
-Generates an access token when provided with proper credentials. 
+Retrieves a certificate for a given cert ID. 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L35"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `view_by_thing`
+
+```python
+view_by_thing(thing_id: str, token: str)
+```
+
+Retrieves a list of certificates' serial IDs for a given thing ID. 
 
 
 
