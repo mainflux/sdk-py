@@ -11,14 +11,14 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L9"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Groups`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L11"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L12"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
@@ -35,12 +35,12 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L148"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L154"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `assign`
 
 ```python
-assign(group_id: str, members_ids, member_type: str, token: str)
+assign(group_id: str, members_ids: str, member_type: dict, token: str)
 ```
 
 Assign 
@@ -59,7 +59,7 @@ Gets children for a specific group from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L15"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
@@ -71,15 +71,15 @@ Creates group entity in the database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L182"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L186"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-### <kbd>method</kbd> `delete`
+### <kbd>method</kbd> `disable`
 
 ```python
-delete(group_id: str, token: str)
+disable(group_id: str, user_token: str)
 ```
 
-Deletes a group entity from database 
+Disables a group entity from database 
 
 ---
 
@@ -107,7 +107,7 @@ Gets all groups from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L117"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L119"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `members`
 
@@ -119,7 +119,7 @@ Get list of members ID's from group
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L133"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L136"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `memberships`
 
@@ -143,7 +143,7 @@ Gets parents for a specific group from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L196"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L200"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `share_groups`
 
@@ -155,7 +155,7 @@ Adds access rights on thing groups to the user group
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L165"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L170"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `unassign`
 
@@ -163,11 +163,11 @@ Adds access rights on thing groups to the user group
 unassign(group_id: str, token: str, members_ids)
 ```
 
-Assign 
+Unassign 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L102"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L101"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 

@@ -88,7 +88,7 @@ Gets a user information
 ### <kbd>method</kbd> `get_all`
 
 ```python
-get_all(query_params: dict, admin_token: str)
+get_all(query_params: dict, user_token: str)
 ```
 
 Retrieves a list of users 

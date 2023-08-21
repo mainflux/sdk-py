@@ -11,14 +11,14 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L9"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Channels`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L13"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
@@ -35,7 +35,7 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L16"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L17"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
@@ -59,12 +59,12 @@ Creates multiple channels in a bulk
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L123"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L116"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
-### <kbd>method</kbd> `delete`
+### <kbd>method</kbd> `disable`
 
 ```python
-delete(channel_id: str, token: str)
+disable(channel_id: str, token: str)
 ```
 
 Deletes a channel entity from database 
@@ -95,7 +95,7 @@ Gets all channels from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L85"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L84"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_by_thing`
 
@@ -107,7 +107,7 @@ Gets all channels to which a specific thing is connected to
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L137"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L131"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `identify_thing`
 
@@ -119,7 +119,7 @@ Validates thing's key and returns it's ID if key is valid
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L108"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/channels.py#L101"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
