@@ -1,4 +1,5 @@
 import requests
+import json
 
 from mainflux import response
 from mainflux import errors
@@ -84,8 +85,7 @@ class Groups:
         """Gets children for a specific group from database"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "/children",
+            self.url + "/" + self.groups_endpoint + "/" + group_id + "/children",
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -102,9 +102,10 @@ class Groups:
         """Updates group entity"""
         http_resp = requests.put(
             self.url + "/" + self.groups_endpoint + "/" + group_id,
-            json=group,
+            data= json.dumps(group),
             headers=utils.construct_header(token, utils.CTJSON),
         )
+        print(http_resp)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -118,8 +119,7 @@ class Groups:
     def members(self, group_id: str, query_params: dict, token: str):
         """Get list of members ID's from group"""
         http_resp = requests.get(
-            self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "/members",
+            self.url + "/" + self.groups_endpoint + "/" + group_id + "/members",
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -129,32 +129,36 @@ class Groups:
             mf_resp.error.message = errors.handle_error(
                 errors.groups["members"], http_resp.status_code
             )
+        else:
+             mf_resp.value = http_resp.json()
         return mf_resp
 
     def memberships(self, member_id: str, query_params: dict, token: str):
         """Get list of members ID's from group"""
         http_resp = requests.get(
-            self.url + "/members/" + member_id + "/" + self.groups_endpoint,
+            self.url + "/users" + "/" + member_id + "/memberships",
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
+        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.groups["members"], http_resp.status_code
             )
+        else:
+             mf_resp.value = http_resp.json()
         return mf_resp
 
-    def assign(self, group_id: str, members_ids, member_type: str, token: str):
+    def assign(self, group_id: str, members_ids: str, member_type: dict, token: str):
         """Assign"""
-        payload = {"type": member_type, "members": members_ids}
+        payload = {"Object": group_id, "Subject": members_ids, "Actions": member_type}
         mf_resp = response.Response()
         http_resp = requests.post(
-            self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "/members",
+            self.url + "/users/policies",
             headers=utils.construct_header(token, utils.CTJSON),
-            json=payload,
+            json= payload,
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -164,12 +168,11 @@ class Groups:
         return mf_resp
 
     def unassign(self, group_id: str, token: str, members_ids):
-        """Assign"""
-        payload = {"members": members_ids}
+        """Unassign"""
+        payload = {"Object": group_id, "Subject": members_ids}
         mf_resp = response.Response()
         http_resp = requests.delete(
-            self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "/members",
+            self.url + "/users/policies" + "/" + members_ids + "/" + group_id,
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
@@ -194,9 +197,7 @@ class Groups:
             )
         return mf_resp
 
-    def share_groups(
-            self, token: str, user_group_id: str, thing_group_id: str
-    ):
+    def share_groups(self, token: str, user_group_id: str, thing_group_id: str):
         """Adds access rights on thing groups to the user group"""
         mf_resp = response.Response()
         http_resp = requests.post(

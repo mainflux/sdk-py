@@ -25,6 +25,7 @@ class Messages:
             headers=utils.construct_header(
                 utils.ThingPrefix + thing_key, utils.CTJSON),
         )
+        print(http_resp)
         if http_resp.status_code != 202:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(

@@ -138,7 +138,7 @@ groups = {
         400: "Failed due to malformed query parameters.",
         404: "Group does not exist.",
     },
-    "delete": {
+    "disable": {
         400: "Failed due to malformed query parameters.",
         404: "Group does not exist.",
     },

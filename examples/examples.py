@@ -15,7 +15,7 @@ mfsdk = sdk.SDK(
 """To start working with the Mainflux system,
 you need to create a user account"""
 mf_resp = mfsdk.users.create(
-    user={"credentials": {"identity": "example23@example.com", "secret": "12345678"}},
+    user={"credentials": {"identity": "example25@example.com", "secret": "12345678"}},
     token="",
 )
 if mf_resp.error.status == 0:
@@ -25,7 +25,7 @@ else:
 
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "example23@example.com", "secret": "12345678"}
+    user={ "identity" : "example20@example.com", "secret": "12345678"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -161,7 +161,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b", thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3", action="m_read", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ"
+    channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", thing_id="769c8d58-bc7e-4003-8e5b-84301534ba7f", action="m_write", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -170,7 +170,7 @@ else:
 
 """Disconnect thing from channel"""
 mf_resp = mfsdk.things.disconnect(
-    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b", thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ"
+    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b", thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -278,7 +278,7 @@ else:
 '''
 """To create a group, you need the group name and a user token"""
 mf_resp = mfsdk.groups.create(
-    group={"name": "group_2"}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ")
+    group={"name": "group_D", "parent_id": "d6198103-4724-427e-b052-e6ad544c8864"}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -293,16 +293,12 @@ else:
 '''
 '''
 """Group update"""
-#group= {
-#  "name": "group_1",
-#  "description": "",
-#  "metadata": {
-#    "role": "general"
-#  }
-#}
+group={
+    "id": "75b2f10c-b903-4205-8af5-9d672be26d63",
+    "name": "group_15"
+}
 mf_resp = mfsdk.groups.update(
-
-    group_id="1705dbd3-e542-4a38-8bef-aa7c33bdcf2d", token="yJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ", group={"name: group_nat"}
+    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA", group= group
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -318,90 +314,91 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-# """Assign user, thing or channel to a group"""
-# mf_resp = mfsdk.groups.assign(
-#     group_id="<group_id>",
-#     token="<user_token>",
-#     members_ids=["<user_id>" | "<thing_id_>" | "<channel_id_>"],
-#     member_type='<"users" | "things" | "channels">',
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
 
-# """Unassign"""
-# mf_resp = mfsdk.groups.unassign(
-#     group_id="<group_id>",
-#     token="<user_token>",
-#     members_ids=["<user_id>" | "<thing_id_>" | "<channel_id_>"],
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
 
-# """Get list of children from group"""
-# mf_resp = mfsdk.groups.children(
-#     group_id="<group_id>", token="<user_token>",
-#     query_params={"offset": 0, "limit": 5}
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
+"""Assign user, thing or channel to a group"""
+mf_resp = mfsdk.groups.assign(
+    group_id="d6198103-4724-427e-b052-e6ad544c8864",
+    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    members_ids="9c398baf-5520-48ed-86de-572be9405d5b",
+    member_type=["g_update"],
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
 
-# """Get list of parents from group"""
-# mf_resp = mfsdk.groups.parents(
-#     group_id="<group_id>", token="<user_token>",
-#     query_params={"offset": 0, "limit": 5}
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
+"""Unassign"""
+mf_resp = mfsdk.groups.unassign(
+    group_id="d6198103-4724-427e-b052-e6ad544c8864",
+    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    members_ids="9c398baf-5520-48ed-86de-572be9405d5b",
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
 
-# """Get list of members from group"""
-# mf_resp = mfsdk.groups.members(
-#     member_id="<thing_id>", token="<user_token>",
-#     query_params={"offset": 0, "limit": 5}
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
+"""Get list of children from group"""
+mf_resp = mfsdk.groups.children(
+    group_id="75b2f10c-b903-4205-8af5-9d672be26d63", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA",
+    query_params={"offset": 0, "limit": 5}
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
 
-# """Get list of memberships from member"""
-# mf_resp = mfsdk.groups.memberships(
-#     group_id="<member_id>",
-#     token="<user_token>",
-#     query_params={"offset": 0, "limit": 5},
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
-'''
+"""Get list of parents from group"""
+mf_resp = mfsdk.groups.parents(
+    group_id="b7cbb7c3-39af-4577-bae9-f83f3674b364", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA",
+    query_params={"offset": 0, "limit": 5}
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Get list of members from group"""
+mf_resp = mfsdk.groups.members(
+    group_id="d6198103-4724-427e-b052-e6ad544c8864", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    query_params={"offset": 0, "limit": 5}
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Get list of memberships from member"""
+mf_resp = mfsdk.groups.memberships(
+    member_id="9c398baf-5520-48ed-86de-572be9405d5b",
+    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    query_params={"offset": 0, "limit": 5},
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
 """Delete group from the database"""
 mf_resp = mfsdk.groups.disable(group_id="29474bea-a8d6-4e5c-9336-5de0c8ca9aaf", user_token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-# """Sends message via HTTP protocol"""
-# mf_resp = mfsdk.messages.send(
-#     channel_id="<channel_id>", msg="<msg>", thing_key="<thing_key>"
-# )
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
 
-# """Reads messages from database for a given channel"""
-# mf_resp = mfsdk.messages.read(channel_id="<channel_id>", token="<user_token>")
-# if mf_resp.error.status == 0:
-#     print(mf_resp.value)
-# else:
-#     print(mf_resp.error.message)
+"""Sends message via HTTP protocol"""
+mf_resp = mfsdk.messages.send(
+    channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", msg="Hello", thing_key="a0c5471a-b7a6-4337-81af-b6113f41d898"
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+'''
+"""Reads messages from database for a given channel"""
+mf_resp = mfsdk.messages.read(channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)

@@ -3,7 +3,6 @@ from mainflux import things
 from mainflux import messages
 from mainflux import channels
 from mainflux import groups
-from mainflux import keys
 from mainflux import boostrap
 from mainflux import certs
 
@@ -30,7 +29,6 @@ class SDK:
         )
         self.channels = channels.Channels(things_url)
         self.groups = groups.Groups(auth_url)
-        self.keys = keys.Keys(auth_url)
         self.bootstrap = boostrap.Bootstrap(bootstrap_url)
         self.certs = certs.Certs(certs_url)
         self.version_url = things_url
