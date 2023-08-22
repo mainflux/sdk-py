@@ -15,7 +15,7 @@
 - **channels**
 - **messages**
 - **groups**
-- **boostrap**
+- **bootstrap**
 - **certs**
 
 ---

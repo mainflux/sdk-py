@@ -144,7 +144,10 @@ groups = {
     },
 }
 
-boostrap = {
+bootstrap = {
+    "add": {
+        401: "Missing or invalid access token provided.",
+    },
     "view": {
         404: "Config does not exist.",
     },
@@ -155,9 +158,12 @@ boostrap = {
     "update": {
         404: "Config does not exist.",
     },
-    "boostrap": {
+    "bootstrap": {
         404: "Failed to retrieve corresponding config."
-    }
+    },
+    "remove": {
+        400: "Failed due to malformed config ID."
+    } 
 }
 certs = {
     "issue": {

@@ -47,7 +47,7 @@ Adds new config to the list of config owned by user identified using the provide
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L130"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L135"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `bootstrap`
 
@@ -59,7 +59,7 @@ Retrieves a configuration with given external ID and external key.
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L114"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L117"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `remove`
 
@@ -71,7 +71,7 @@ Removes a Config. In case of successful removal the service will ensure that the
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L72"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L73"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
@@ -83,7 +83,7 @@ Update is performed by replacing the current resource data with values provided 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L93"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L96"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_certs`
 
@@ -101,19 +101,19 @@ Update is performed by replacing the current certificate data with values provid
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L56"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L57"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `view`
 
 ```python
-view(config_id: str, token: str)
+view(thing_id: str, token: str)
 ```
 
 Retrieves a configuration with given config id 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L36"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L35"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `whitelist`
 

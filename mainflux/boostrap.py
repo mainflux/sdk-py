@@ -6,10 +6,10 @@ from mainflux import utils
 
 
 class Bootstrap:
-    configs_endpoint = "configs"
-    bootstrap_endpoint = "bootstrap"
-    whitelist_endpoint = "state"
-    bootstrap_certs_endpoint = "configs/certs"
+    CONFIGS_ENDPOINT = "configs"
+    BOOTSTRAP_ENDPOINT = "bootstrap"
+    WHITELIST_ENDPOINT = "things/state"
+    BOOTSTRAP_CERTS_ENDPOINT = "configs/certs"
 
     def __init__(self, url: str):
         self.url = url
@@ -19,18 +19,17 @@ class Bootstrap:
         using the provided access token."""
         mf_resp = response.Response()
         http_resp = requests.post(
-            self.url + "/" + self.configs_endpoint,
+            self.url + "/things" + "/" + self.CONFIGS_ENDPOINT,
             json=config,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["add"], http_resp.status_code
+                errors.bootstrap["add"], http_resp.status_code
             )
         else:
-            location = http_resp.headers.get("location")
-            mf_resp.value = location.split("/")[2]
+            mf_resp.value = "added"
         return mf_resp
 
     def whitelist(self, config: dict, token: str):
@@ -38,32 +37,34 @@ class Bootstrap:
         i.e.connecting and disconnecting corresponding Mainflux Thing to the
         list of Channels."""
         mf_resp = response.Response()
-        if config["MFThing"] == "":
+        if config["thing_id"] == "":
             mf_resp.error.status = 1
             mf_resp.error.message = "parameter not found in the query"
         http_resp = requests.put(
-            self.url + "/" + self.whitelist_endpoint + "/" + config["MFThing"],
+            self.url + "/" + self.WHITELIST_ENDPOINT + "/" + config["thing_id"],
             json=config,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["whitelist"], http_resp.status_code
+                errors.bootstrap["whitelist"], http_resp.status_code
             )
+        else:
+            mf_resp.value = "OK"
         return mf_resp
 
-    def view(self, config_id: str, token: str):
+    def view(self, thing_id: str, token: str):
         """Retrieves a configuration with given config id"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.configs_endpoint + "/" + config_id,
+            self.url + "/things" + "/" + self.CONFIGS_ENDPOINT + "/" + thing_id,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["view"], http_resp.status_code
+                errors.bootstrap["view"], http_resp.status_code
             )
         else:
             mf_resp.value = http_resp.json()
@@ -75,19 +76,21 @@ class Bootstrap:
         external ID, external key, Mainflux Thing ID and key cannot be
         changed."""
         mf_resp = response.Response()
-        if config["MFThing"] == "":
+        if config["thing_id"] == "":
             mf_resp.error.status = 1
             mf_resp.error.message = "parameter not found in the query"
         http_resp = requests.put(
-            self.url + "/" + self.configs_endpoint + "/" + config["MFThing"],
+            self.url + "/things/" + self.CONFIGS_ENDPOINT + "/" + config["thing_id"],
             headers=utils.construct_header(token, utils.CTJSON),
-            data=config,
+            json=config,
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["update"], http_resp.status_code
+                errors.bootstrap["update"], http_resp.status_code
             )
+        else:
+            mf_resp.value = "Config updated."
         return mf_resp
 
     def update_certs(
@@ -99,7 +102,7 @@ class Bootstrap:
         payload = {"client_cert": client_cert,
                    "client_key": client_key, "ca_cert": ca}
         http_resp = requests.patch(
-            self.url + "/" + self.bootstrap_certs_endpoint + "/" + config_id,
+            self.url + "/" + self.BOOTSTRAP_CERTS_ENDPOINT + "/" + config_id,
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
@@ -107,7 +110,7 @@ class Bootstrap:
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["update"], http_resp.status_code
+                errors.bootstrap["update"], http_resp.status_code
             )
         return mf_resp
 
@@ -116,15 +119,17 @@ class Bootstrap:
         ensure that the removed config is disconnected from all the
         Mainflux channels."""
         mf_resp = response.Response()
-        http_resp = requests.post(
-            self.url + "/" + self.configs_endpoint + "/" + config_id,
+        http_resp = requests.delete(
+            self.url + "/things/" + self.CONFIGS_ENDPOINT + "/" + config_id,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         if http_resp.status_code != 204:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["remove"], http_resp.status_code
+                errors.bootstrap["remove"], http_resp.status_code
             )
+        else:
+             mf_resp.value = "Config removed."
         return mf_resp
 
     def bootstrap(self, external_id: str, external_key: str):
@@ -132,12 +137,14 @@ class Bootstrap:
         key."""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.bootstrap_endpoint + "/" + external_id,
-            headers=utils.construct_header(external_key, utils.CTJSON),
+            self.url + "/things/bootstrap" + "/" + external_id,
+            headers=utils.construct_header(utils.ThingPrefix+external_key, utils.CTJSON),
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.boostrap["bootstrap"], http_resp.status_code
+                errors.bootstrap["bootstrap"], http_resp.status_code
             )
+        else:
+            mf_resp.value = http_resp.json()
         return mf_resp
