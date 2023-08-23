@@ -42,6 +42,23 @@ class Users:
         else:
             mf_resp.value = http_resp.json()
         return mf_resp
+    
+    def refresh_token(self, user: dict, token: str):
+        """Refreshes Access and Refresh Token used for authenticating into the system."""
+        mf_resp = response.Response()
+        http_resp = requests.post(
+            self.URL + "/users/tokens/refresh", 
+            headers=utils.construct_header(token, utils.CTJSON),
+            json=user
+        )
+        if http_resp.status_code != 201:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["refresh_token"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
 
     def get(self, user_id: str, token: str):
         """Gets a user information"""
@@ -77,8 +94,7 @@ class Users:
         return mf_resp
 
     def update(self, user: dict, user_token: str):
-        """Updates info on currently logged in user. Info is updated using
-        authorization user_token"""
+        """Updates info on currently logged in user. Info is updated using authorization user_token"""
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"],
             headers=utils.construct_header(user_token, utils.CTJSON),
@@ -93,7 +109,58 @@ class Users:
         else:
             mf_resp.value = http_resp.json()
         return mf_resp
-
+    
+    def update_user_identity(self, user: dict, user_token: str):
+        """Updates Identity of the user"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/identity",
+            headers=utils.construct_header(user_token, utils.CTJSON),
+            data=json.dumps(user),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["update_user_identity"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def update_user_tags(self, user: dict, user_token: str):
+        """Updating user tags in the database"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/tags",
+            headers=utils.construct_header(user_token, utils.CTJSON),
+            data=json.dumps(user),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["update_user_tags"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def update_user_owner(self, user: dict, user_token: str):
+        """Updating user tags in the database"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/owner",
+            headers=utils.construct_header(user_token, utils.CTJSON),
+            data=json.dumps(user),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["update_user_owner"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
     def update_password(self, old_secret: str, new_secret: str, user_token: str):
         """Changes user password"""
         payload = {"old_secret": old_secret, "new_secret": new_secret}
@@ -107,6 +174,40 @@ class Users:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.users["update"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = "OK"
+        return mf_resp
+    
+    def reset_password_request(self, email: str, url: str):
+        """User Password reset request"""
+        http_resp = requests.post(
+            self.URL + "/password/reset-request",
+            headers= {"Referer": url},
+            json= {"email": email} 
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 201:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["reset_password_request"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def reset_password(self, password: str, confirm_password: str, token: str):
+        """Changes user password with the reset_request token"""
+        payload = {"password": password, "confirm_password": confirm_password, "token": token}
+        http_resp = requests.put(
+            self.URL + "/password/reset",
+            json=payload,
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 201:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["reset_password"], http_resp.status_code
             )
         else:
             mf_resp.value = "OK"
@@ -142,4 +243,21 @@ class Users:
             )
         else:
             mf_resp.value = http_resp.json()
+        return mf_resp
+
+    def authorise_user(self,access_request: dict, token: str):
+        """Authorises user"""
+        mf_resp = response.Response()
+        http_resp= requests.post(
+            self.URL +"/authorize",
+            headers=utils.construct_header(token, utils.CTJSON),
+            json= access_request
+        )
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.users["authorise_user"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = "True"
         return mf_resp

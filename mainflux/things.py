@@ -1,5 +1,5 @@
 import requests
-
+import json
 from mainflux import response
 from mainflux import errors
 from mainflux import utils
@@ -111,6 +111,59 @@ class Things:
             mf_resp.error.message = errors.handle_error(
                 errors.things["update"], http_resp.status_code
             )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def update_thing_secret(self, thing_id: str, thing: dict, token: str):
+        """Updates thing secret"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.THINGS_ENDPOINT + "/" + thing_id + "/secret",
+            json=thing,
+            headers=utils.construct_header(token, utils.CTJSON),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.things["update_thing_secret"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def update_thing_tags(self, thing_id: str, thing: dict, token: str):
+        """Updates thing secret"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.THINGS_ENDPOINT + "/" + thing_id + "/tags",
+            json=thing,
+            headers=utils.construct_header(token, utils.CTJSON),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.things["update_thing_tags"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def update_thing_owner(self, thing_id: str, thing: dict, token: str):
+        """Updates thing secret"""
+        http_resp = requests.patch(
+            self.URL + "/" + self.THINGS_ENDPOINT + "/" + thing_id + "/owner",
+            json=thing,
+            headers=utils.construct_header(token, utils.CTJSON),
+        )
+        mf_resp = response.Response()
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.things["update_thing_owner"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def disable(self, thing_id: str, token: str):
@@ -135,7 +188,6 @@ class Things:
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
@@ -154,7 +206,6 @@ class Things:
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 204:
             mf_resp.error.status = 1
@@ -171,7 +222,6 @@ class Things:
             headers=utils.construct_header(token, utils.CTJSON),
             json= payload, 
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
@@ -190,7 +240,6 @@ class Things:
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 204:
             mf_resp.error.status = 1
@@ -198,3 +247,41 @@ class Things:
                 errors.things["disconnect"], http_resp.status_code
             )
         return mf_resp
+    
+    def share_thing(self, user_id: str, group_id: str, actions: dict, token: str):
+        """Share thing"""
+        payload = {"object": group_id, "subject": user_id, "Actions": actions, "External": True}
+        http_resp = requests.post(
+            self.URL + "/policies",
+            headers=utils.construct_header(token, utils.CTJSON),
+            data=json.dumps(payload)
+        )
+        print(http_resp.request.url)
+        print(http_resp)
+        mf_resp = response.Response()
+        if http_resp.status_code != 201:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.things["share_thing"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = http_resp.json()
+        return mf_resp
+    
+    def authorise_thing(self,access_request: dict, token: str):
+        """Authorises thing"""
+        mf_resp = response.Response()
+        http_resp= requests.post(
+            self.URL +"/authorize",
+            headers=utils.construct_header(token, utils.CTJSON),
+            json= access_request
+        )
+        if http_resp.status_code != 200:
+            mf_resp.error.status = 1
+            mf_resp.error.message = errors.handle_error(
+                errors.things["authorise_thing"], http_resp.status_code
+            )
+        else:
+            mf_resp.value = "True"
+        return mf_resp
+    

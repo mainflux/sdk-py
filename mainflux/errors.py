@@ -25,6 +25,9 @@ users = {
     "login": {
         409: "Failed due to using an existing email address.",
     },
+    "refresh_token": {
+        404: "A non-existent entity request.",
+    },
     "get": {
         400: "Failed due to malformed query parameters.",
     },
@@ -34,12 +37,30 @@ users = {
     "update": {
         404: "Failed due to non existing user.",
     },
+    "update_user_identity": {
+        401: "Missing or invalid access token provided.",
+    },
+    "update_user_tags": {
+        401: "Missing or invalid access token provided.",
+    },
+    "update_user_owner": {
+        401: "Missing or invalid access token provided.",
+    },
     "enable": {
         404: "Failed due to non existing user."
     },
     "disable": {
         404: "Failed due to non existing user."
     },
+    "reset_password_request": {
+        400: "Failed due to malformed JSON."
+    },
+    "reset_password": {
+        400: "Failed due to malformed JSON."
+    },
+    "authorise_user":{
+        400: "Failed due to malformed JSON."
+    }
 }
 
 things = {
@@ -47,7 +68,6 @@ things = {
         422: "Unprocessable Entity."
     },
     "create_bulk": {
-
     },
     "get": {
         400: "Failed due to malformed query parameters.",
@@ -62,6 +82,15 @@ things = {
     "update": {
         404: "Thing does not exist.",
     },
+    "update_thing_secret": {
+        401: "Missing or invalid access token provided.",
+    },
+    "update_thing_tags": {
+        401: "Missing or invalid access token provided.",
+    },
+    "update_thing_owner": {
+        401: "Missing or invalid access token provided.",
+    },
     "delete": {
         400: "Failed due to malformed thing's ID.",
     },
@@ -72,6 +101,12 @@ things = {
         400: "Failed due to malformed query parameters.",
         404: "Channel or thing does not exist.",
     },
+    "share_thing": {
+        400: "A non-existent entity request."
+    },
+    "authorise_thing":{
+        400: "False"
+    }
 }
 
 channels = {

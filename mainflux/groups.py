@@ -105,7 +105,6 @@ class Groups:
             data= json.dumps(group),
             headers=utils.construct_header(token, utils.CTJSON),
         )
-        print(http_resp)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -140,7 +139,6 @@ class Groups:
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1

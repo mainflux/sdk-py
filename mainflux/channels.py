@@ -119,7 +119,6 @@ class Channels:
             self.url + "/" + self.channels_endpoint + "/" + channel_id + "/disable",
             headers=utils.construct_header(token, utils.CTJSON),
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -134,7 +133,6 @@ class Channels:
             self.url + "/" + self.identify_endpoint,
             headers=utils.construct_header(utils.ThingPrefix + thing_key, utils.CTJSON),
         )
-        print(http_resp.request.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
