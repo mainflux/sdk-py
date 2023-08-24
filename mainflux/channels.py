@@ -3,13 +3,12 @@ import requests
 from mainflux import response
 from mainflux import errors
 from mainflux import utils
-from mainflux import things
 
 
 class Channels:
-    channels_endpoint = "channels"
-    things_endpoint = "things"
-    identify_endpoint = "identify"
+    CHANNELS_ENDPOINT = "channels"
+    THINGS_ENDPOINT = "things"
+    IDENTIFY_ENDPOINT = "identify"
 
     def __init__(self, url: str):
         self.url = url
@@ -18,7 +17,7 @@ class Channels:
         """Creates channel entity in the database"""
         mf_resp = response.Response()
         http_resp = requests.post(
-            self.url + "/" + self.channels_endpoint,
+            self.url + "/" + self.CHANNELS_ENDPOINT,
             json=channel,
             headers=utils.construct_header(token, utils.CTJSON),
         )
@@ -35,7 +34,7 @@ class Channels:
         """Creates multiple channels in a bulk"""
         mf_resp = response.Response()
         http_resp = requests.post(
-            self.url + "/" + self.channels_endpoint + "/bulk",
+            self.url + "/" + self.CHANNELS_ENDPOINT + "/bulk",
             json=channels,
             headers=utils.construct_header(token, utils.CTJSON),
         )
@@ -52,7 +51,7 @@ class Channels:
         """Gets a channel entity for a logged-in user"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.channels_endpoint + "/" + channel_id,
+            self.url + "/" + self.CHANNELS_ENDPOINT + "/" + channel_id,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         if http_resp.status_code != 200:
@@ -68,7 +67,7 @@ class Channels:
         """Gets all channels from database"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.channels_endpoint,
+            self.url + "/" + self.CHANNELS_ENDPOINT,
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -85,7 +84,7 @@ class Channels:
         """Gets all channels to which a specific thing is connected to"""
         mf_resp = response.Response()
         http_resp = requests.get(
-            self.url + "/" + self.things_endpoint + "/" + thing_id + "/" + self.channels_endpoint,
+            self.url + "/" + self.THINGS_ENDPOINT + "/" + thing_id + "/" + self.CHANNELS_ENDPOINT,
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -101,7 +100,7 @@ class Channels:
     def update(self, channel_id: str, channel: dict, token: str):
         """Updates channel entity"""
         http_resp = requests.put(
-            self.url + "/" + self.channels_endpoint + "/" + channel_id,
+            self.url + "/" + self.CHANNELS_ENDPOINT + "/" + channel_id,
             json=channel,
             headers=utils.construct_header(token, utils.CTJSON),
         )
@@ -116,7 +115,7 @@ class Channels:
     def disable(self, channel_id: str, token: str):
         """Deletes a channel entity from database"""
         http_resp = requests.post(
-            self.url + "/" + self.channels_endpoint + "/" + channel_id + "/disable",
+            self.url + "/" + self.CHANNELS_ENDPOINT + "/" + channel_id + "/disable",
             headers=utils.construct_header(token, utils.CTJSON),
         )
         mf_resp = response.Response()
@@ -130,7 +129,7 @@ class Channels:
     def identify_thing(self, thing_key: str):
         """Validates thing's key and returns it's ID if key is valid"""
         http_resp = requests.post(
-            self.url + "/" + self.identify_endpoint,
+            self.url + "/" + self.IDENTIFY_ENDPOINT,
             headers=utils.construct_header(utils.ThingPrefix + thing_key, utils.CTJSON),
         )
         mf_resp = response.Response()

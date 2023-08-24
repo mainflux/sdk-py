@@ -35,7 +35,19 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L166"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L271"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `authorise_thing`
+
+```python
+authorise_thing(access_request: dict, token: str)
+```
+
+Authorises thing 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L217"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `connect`
 
@@ -47,7 +59,7 @@ Connects thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L130"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L183"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `connects`
 
@@ -83,7 +95,7 @@ Creates multiple things in a bulk
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L116"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L169"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disable`
 
@@ -95,7 +107,7 @@ Deletes a thing entity from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L185"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L235"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disconnect`
 
@@ -107,7 +119,7 @@ Disconnect thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L149"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L201"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disconnects`
 
@@ -155,6 +167,18 @@ Gets all things to which a specific thing is connected to
 
 ---
 
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L251"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `share_thing`
+
+```python
+share_thing(user_id: str, channel_id: str, actions: dict, token: str)
+```
+
+Share thing 
+
+---
+
 <a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L101"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
@@ -164,6 +188,42 @@ update(thing_id: str, thing: dict, token: str)
 ```
 
 Updates thing entity 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L152"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `update_thing_owner`
+
+```python
+update_thing_owner(thing_id: str, thing: dict, token: str)
+```
+
+Updates thing secret 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L118"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `update_thing_secret`
+
+```python
+update_thing_secret(thing_id: str, thing: dict, token: str)
+```
+
+Updates thing secret 
+
+---
+
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L135"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+
+### <kbd>method</kbd> `update_thing_tags`
+
+```python
+update_thing_tags(thing_id: str, thing: dict, token: str)
+```
+
+Updates thing secret 
 
 
 

@@ -7,15 +7,15 @@ mfsdk = sdk.SDK(
     things_url=default_url + ":9000",
     reader_url=default_url + ":9204",
     http_adapter_url=default_url,
-    certs_url=default_url + ":8204",
-    bootstrap_url=default_url + ":8202",
+    certs_url=default_url + ":9019",
+    bootstrap_url=default_url + ":9013",
     auth_url=default_url,
 )
-'''
+
 """To start working with the Mainflux system,
 you need to create a user account"""
 mf_resp = mfsdk.users.create(
-    user={"credentials": {"identity": "example25@example.com", "secret": "12345678"}},
+    user={"credentials": {"identity": "<user_identity>", "secret": "<user_secret>"}},
     token="",
 )
 if mf_resp.error.status == 0:
@@ -25,81 +25,173 @@ else:
 
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "example20@example.com", "secret": "12345678"}
+    user={ "identity" : "<user_identity>", "secret": "<user_secret>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
-"""You can always check the user entity that is logged in
-by entering the user ID and token"""
-mf_resp = mfsdk.users.get(user_id="0f047968-b170-4dd4-85f5-6e03e1b3798e", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTE3NTIxOTcsImlhdCI6MTY5MTc1MTI5NywiaWRlbnRpdHkiOiJleGFtcGxlMTJAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiIwZjA0Nzk2OC1iMTcwLTRkZDQtODVmNS02ZTAzZTFiMzc5OGUiLCJ0eXBlIjoiYWNjZXNzIn0.REa8wv-veZm2fpAeLe3jO9SMYMnyPrcT07YTmx4M_lOE3wYYal26HYp8RHd6z3Igy7ccadSKiqaygyvrpkMLzw")
+
+"""Refreshes Access and Refresh Token used for authenticating into the system."""
+user= {
+  "credentials": {
+    "identity": "<user_identity>",
+    "secret": "<user_secret>"
+  },
+  "id": "<user_id>",
+  "name": "<user_name>"
+}
+mf_resp = mfsdk.users.refresh_token(
+    user= user,
+    token="<refresh_token>"
+)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
-"""Updating user entities in the database"""
+
+"""You can always check the user entity that is logged in
+by entering the user ID and token"""
+mf_resp = mfsdk.users.get(user_id="<user_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Updates user entities in the database"""
 user = {
-    "id": "",
-    "name": "",
+    "id": "<user_id>",
+    "name": "<user_name>",
     "metadata": {
         "foo": "bar"
     }
 }
-mf_resp = mfsdk.users.update(
-    user_token="", user=user
-)
+mf_resp = mfsdk.users.update(user_token="<token>", user=user)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
+
+"""Updates user identity in the database"""
+user = {
+  "credentials": {
+    "identity": "<user_identity>",
+  },
+  "id": "<user_id>"
+}
+mf_resp = mfsdk.users.update_user_identity(user_token="<token>", user=user)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Updates user tags in the database"""
+user = {
+  "id": "<user_id>",
+  "name": "<user_name>",
+  "tags": [
+    "yellow",
+    "orange"
+  ]
+}
+mf_resp = mfsdk.users.update_user_tags(user_token="<token>", user=user)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Updates user owner in the database"""
+user = {
+  "credentials": {
+    "identity": "<user_identity>",
+    "secret": "<secret>"
+  },
+  "id": "<user_id>",
+  "owner": "<owner_id>"
+}
+mf_resp = mfsdk.users.update_user_owner(user_token="<token>", user=user)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+    
+"""User Password reset request"""
+mf_resp = mfsdk.users.reset_password_request(email= "<email>", url= "<url>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""User Password reset with the reset_request token"""
+mf_resp = mfsdk.users.reset_password(password="<password>", confirm_password="<confirm_password>", token= "<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
 """You can get all users in the database by calling the get_all () function"""
 mf_resp = mfsdk.users.get_all(
     query_params={"offset": 0, "limit": 5},
-    admin_token="",
+    user_token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
-mf_resp = mfsdk.users.disable(user_id="46c266a8-084d-4863-b013-9d27be7617e5", user_token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTE4MTIxMjQsImlhdCI6MTY5MTc1ODEyNCwiaWRlbnRpdHkiOiJleGFtcGxlMTVAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiJhZTE4ZjZiZS01OTJmLTQ1NjAtOGIxNy1jMmUxYmYyNzNhYWUiLCJ0eXBlIjoiYWNjZXNzIn0.SO3Z6-mNbYFEuJDlO1E477nQblg0UR6r0C7aR8jhRcTpDA62isovYjXhdoDdjPrRrDb7K1hHSHrxHhMFPiYz7w")
+    
+"""Disables user"""
+mf_resp = mfsdk.users.disable(user_id="<user_id>", user_token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+    
+"""Enables user"""
+mf_resp = mfsdk.users.enable(user_id="<user_id>", user_token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
-mf_resp = mfsdk.users.enable(user_id="46c266a8-084d-4863-b013-9d27be7617e5", user_token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTE4MTIxMjQsImlhdCI6MTY5MTc1ODEyNCwiaWRlbnRpdHkiOiJleGFtcGxlMTVAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiJhZTE4ZjZiZS01OTJmLTQ1NjAtOGIxNy1jMmUxYmYyNzNhYWUiLCJ0eXBlIjoiYWNjZXNzIn0.SO3Z6-mNbYFEuJDlO1E477nQblg0UR6r0C7aR8jhRcTpDA62isovYjXhdoDdjPrRrDb7K1hHSHrxHhMFPiYz7w")
-if mf_resp.error.status == 0:
-    print(mf_resp.value)
-else:
-    print(mf_resp.error.message)
-
-"""Changing the user password can be done by calling
-the update password function"""
-'''
-"""
+"""Changing the user password can be done by calling the update password function"""
 mf_resp = mfsdk.users.update_password(
-    old_secret="", secret="",
-    user_token=""
+    old_secret="<old_secret>", new_secret="<new_secret>",
+    user_token="<user_token>"
 )
-
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-"""
-'''
+
+"""Authorising a User"""
+access_request = {
+    "subject": "",
+    "object": "",
+    "Action": "",
+    "Entity_type": ""
+}
+mf_resp = mfsdk.users.authorise_user(access_request=access_request, token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Authorising a Thing"""
+access_request = {
+    "subject": "",
+    "object": "",
+    "Action": "",
+    "Entity_type": ""
+}
+mf_resp = mfsdk.things.authorise_thing(access_request=access_request, token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
 """To create a thing, you need the thing name and a user token"""
 mf_resp = mfsdk.things.create(
-    thing={"name": "thing1"}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ")
+    thing={"name": "<thing_name>"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -108,8 +200,8 @@ else:
 """You can create multiple things at once
 by entering a series of things structures and a user token"""
 mf_resp = mfsdk.things.create_bulk(
-    things=[{"name": "thing_8"}, {"name": "thing_9"}, {"name": "thing_10"}],
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ",
+    things=[{"name": "<thing_name>"}, {"name": "<thing_name>"}, {"name": "<thing_name>"}],
+    token="<token>",
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -117,7 +209,7 @@ else:
     print(mf_resp.error.message)
 
 """You can get thing information by entering the thing ID and user token"""
-mf_resp = mfsdk.things.get(token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ", thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3")
+mf_resp = mfsdk.things.get(thing_id= "<thing_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -125,23 +217,62 @@ else:
 
 """You can get all things in the database by calling the get_all () function"""
 mf_resp = mfsdk.things.get_all(
-    query_params={"offset": 0, "limit": 5}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ"
+    query_params={"offset": 0, "limit": 5}, token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
-"""Updating a thing entity in a database"""
+"""Updates a thing entity in a database"""
 mf_resp = mfsdk.things.update(
-    thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ", thing={"name": "thing_1"}
+    thing_id="<thing_id>", token="<token>", thing={"name": "<thing_name>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
-"You can get all thing connected to channel"
+"""Updates a thing secret in a database"""
+mf_resp = mfsdk.things.update_thing_secret(
+    thing_id="<thing_id>", token="<token>", thing={"secret": "<thing_secret>"}
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Updates a thing's tags in a database"""
+thing=  {
+    "id": "<thing_id>",
+    "name": "<thing_name>",
+    "tags": [
+    "dev","back"
+    ]
+  }
+mf_resp = mfsdk.things.update_thing_tags(
+    thing_id="<thing_id>", token="<token>", thing=thing
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Updates a thing's owner"""
+thing=  {
+    "id": "<thing_id>",
+    "name": "<thing_name>",
+    "owner": "<owner_id>",
+}
+mf_resp = mfsdk.things.update_thing_owner(
+    thing_id="<thing_id>", token="<token>", thing=thing
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""You can get all thing connected to channel"""
 mf_resp = mfsdk.things.get_by_channel(
     channel_id="<channel_id>",
     query_params={"offset": 1, "limit": 5},
@@ -153,7 +284,7 @@ else:
     print(mf_resp.error.message)
 
 """To disable a thing you need a thing ID and a user token"""
-mf_resp = mfsdk.things.disable(thing_id="2ad76a79-640b-44c3-ab1c-3894d4013391", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ")
+mf_resp = mfsdk.things.disable(thing_id="<thing_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -161,7 +292,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", thing_id="769c8d58-bc7e-4003-8e5b-84301534ba7f", action="m_write", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g"
+    channel_id="<channel_id>", thing_id="<thing_id>", action="<action>", token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -170,7 +301,7 @@ else:
 
 """Disconnect thing from channel"""
 mf_resp = mfsdk.things.disconnect(
-    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b", thing_id="6d591627-8657-43af-bfaa-79047b5f8ec3", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g"
+    channel_id="<channel_id>", thing_id="<thing_id>", token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -179,10 +310,10 @@ else:
 
 """Connect things to channels"""
 mf_resp = mfsdk.things.connects(
-    thing_ids=["769c8d58-bc7e-4003-8e5b-84301534ba7f", "a937d27a-b0aa-4e4f-a85e-bb95bf0ac1bf"],
-    channel_ids=["6a4c094d-b192-4e7b-837f-6d2a2bae12d5"],
-    action="m_read",
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ",
+    thing_ids=["<thing_id>", "<thing_id>"],
+    channel_ids=["<channel_ids>"],
+    action="<action>",
+    token="<token>",
 )
 
 if mf_resp.error.status == 0:
@@ -201,9 +332,21 @@ if mf_resp.error.status == 0:
 else:
     print(mf_resp.error.message)
 
+"""Share thing"""
+mf_resp = mfsdk.things.share_thing(
+    channel_id= "<object>", 
+    user_id= "<subject>", 
+    actions= ["action"], 
+    token= "<token>"
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message) 
+ 
 """To create a channel, you need a channel and a token"""
 mf_resp = mfsdk.channels.create(
-    channel={"name": "channel_3"}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ")
+    channel={"name": "<channel_name>"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -211,8 +354,8 @@ else:
 
 """As with things, you can create multiple channels at once"""
 mf_resp = mfsdk.channels.create_bulk(
-    channels=[{"name": "channel_6"}, {"name": "channel_7"}],
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ",
+    channels=[{"name": "<channel_name>"}, {"name": "<channel_name>"}],
+    token="<token>",
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -221,18 +364,17 @@ else:
     
 """Update channel entities in the database"""
 mf_resp = mfsdk.channels.update(
-    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b",
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ",
-    channel={"name": "channel_3"},
+    channel_id="<channel_id>",
+    token="<token>",
+    channel={"name": "<channel_name>"},
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
+
 """You can get channel information by entering the channel ID and user token"""
-mf_resp = mfsdk.channels.get(token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ", channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b")
+mf_resp = mfsdk.channels.get(token="<token>", channel_id="<channel_id>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -241,7 +383,7 @@ else:
 """You can get all channels in the database by calling the get_all ()
 function"""
 mf_resp = mfsdk.channels.get_all(
-    query_params={"offset": 0, "limit": 5}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ"
+    query_params={"offset": 0, "limit": 5}, token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -250,78 +392,72 @@ else:
 
 """A list of all the channels to which a given thing is connected"""
 mf_resp = mfsdk.channels.get_by_thing(
-    thing_id="2ad76a79-640b-44c3-ab1c-3894d4013391", query_params={"offset": 0, "limit": 5},
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ"
+    thing_id="<thing_id>", query_params={"offset": 0, "limit": 5},
+    token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
-
 """Identifies thing when given thing key"""
-mf_resp = mfsdk.channels.identify_thing(thing_key="a0c5471a-b7a6-4337-81af-b6113f41d898", user_token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ")
+mf_resp = mfsdk.channels.identify_thing(thing_key="<thing_secret>", user_token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-    
 
 """Delete channels from the database"""
 mf_resp = mfsdk.channels.disable(
-    channel_id="2b7ff10e-9294-47a9-a66b-e8f7de7c5a8b", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIwNTUxNzIsImlhdCI6MTY5MjAwMTE3MiwiaWRlbnRpdHkiOiJleGFtcGxlMTlAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI2OWFkNjk0Ny0xZGQ1LTRmNzItYTQ3NC1kMGZmNDE0MTUyYTEiLCJ0eXBlIjoiYWNjZXNzIn0.mlfRaQG69XmKUei9KW2287Kvk7_EiuAVeGbmq9aojA2FzzoicRxsTWkwEJGuhwWBHxQgBMe99j5rdb6EbJHkWQ")
+    channel_id="<channel_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
+
 """To create a group, you need the group name and a user token"""
 mf_resp = mfsdk.groups.create(
-    group={"name": "group_D", "parent_id": "d6198103-4724-427e-b052-e6ad544c8864"}, token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA")
+    group={"name": "<group_nme>", "parent_id": "<group_id>"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
 """You can get group information by entering the group ID and token"""
-mf_resp = mfsdk.groups.get(group_id="1705dbd3-e542-4a38-8bef-aa7c33bdcf2d", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ")
+mf_resp = mfsdk.groups.get(group_id="<group_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
-'''
+
 """Group update"""
 group={
-    "id": "75b2f10c-b903-4205-8af5-9d672be26d63",
-    "name": "group_15"
+    "id": "<group_id>",
+    "name": "<group_name>"
 }
 mf_resp = mfsdk.groups.update(
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA", group= group
-)
-if mf_resp.error.status == 0:
-    print(mf_resp.value)
-else:
-    print(mf_resp.error.message)
-'''
-'''
-"""You can get groups in the database by calling the get_all () function"""
-mf_resp = mfsdk.groups.get_all(
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ", query_params={"offset": 0, "limit": 5}
+    token="<token>", group= group, group_id="group_id"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
+"""You can get groups in the database by calling the get_all () function"""
+mf_resp = mfsdk.groups.get_all(
+    token="<token>", query_params={"offset": 0, "limit": 5}
+)
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
 
 """Assign user, thing or channel to a group"""
 mf_resp = mfsdk.groups.assign(
-    group_id="d6198103-4724-427e-b052-e6ad544c8864",
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
-    members_ids="9c398baf-5520-48ed-86de-572be9405d5b",
-    member_type=["g_update"],
+    group_id="<object>",
+    token="<token>",
+    members_ids="<subject>",
+    member_type=["<actions>"],
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -330,9 +466,9 @@ else:
 
 """Unassign"""
 mf_resp = mfsdk.groups.unassign(
-    group_id="d6198103-4724-427e-b052-e6ad544c8864",
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
-    members_ids="9c398baf-5520-48ed-86de-572be9405d5b",
+    group_id="<object>",
+    token="<token>",
+    members_ids="<subject>",
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -341,7 +477,7 @@ else:
 
 """Get list of children from group"""
 mf_resp = mfsdk.groups.children(
-    group_id="75b2f10c-b903-4205-8af5-9d672be26d63", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA",
+    group_id="<group_id>", token="<token>",
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -351,7 +487,7 @@ else:
 
 """Get list of parents from group"""
 mf_resp = mfsdk.groups.parents(
-    group_id="b7cbb7c3-39af-4577-bae9-f83f3674b364", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIyNjk5MzEsImlhdCI6MTY5MjIxNTkzMSwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.vDHq7AOvppvknsKPdAxnGjsErUZ25_gAbZJ1zom3QqZ1sNAoPPU5AyVor-EgMeq1yvhggh8wzLx-9TSK6pQcCA",
+    group_id="<group_id>", token="<token>",
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -361,7 +497,7 @@ else:
 
 """Get list of members from group"""
 mf_resp = mfsdk.groups.members(
-    group_id="d6198103-4724-427e-b052-e6ad544c8864", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    group_id="<group_id>", token="<token>",
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -371,8 +507,8 @@ else:
 
 """Get list of memberships from member"""
 mf_resp = mfsdk.groups.memberships(
-    member_id="9c398baf-5520-48ed-86de-572be9405d5b",
-    token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMjEyNzgsImlhdCI6MTY5MjI2NzI3OCwiaWRlbnRpdHkiOiJleGFtcGxlMjRAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI5ZjczNGQ1Yi03NTgwLTQ5NzEtYmM0Mi1hYWYxMTlhZTg5MGEiLCJ0eXBlIjoiYWNjZXNzIn0.o5l7GX9OXrTr_st-gc1FNPwf7Kx-7FYrO7JUfXOUIL9GR0lKqBuwOLHpQav_8RCWmO1EFsiRzo1hsWRE1BKoXA",
+    member_id="<member_id>",
+    token="<token>",
     query_params={"offset": 0, "limit": 5},
 )
 if mf_resp.error.status == 0:
@@ -381,7 +517,7 @@ else:
     print(mf_resp.error.message)
 
 """Delete group from the database"""
-mf_resp = mfsdk.groups.disable(group_id="29474bea-a8d6-4e5c-9336-5de0c8ca9aaf", user_token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIxNDM0MTEsImlhdCI6MTY5MjA4OTQxMSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.BgXBpOdkOP6s2QMLdzv4jHsl3rX16ZkA_r34BS4wL8UA_xr5gWxeyqaNL8x9tkNNRz4RML40Lo2lGtd2sMvVZQ")
+mf_resp = mfsdk.groups.disable(group_id="<group_id>", user_token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -389,16 +525,105 @@ else:
 
 """Sends message via HTTP protocol"""
 mf_resp = mfsdk.messages.send(
-    channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", msg="Hello", thing_key="a0c5471a-b7a6-4337-81af-b6113f41d898"
+    channel_id="<channel_id>", msg="<[message]>", thing_key="<thing_secret>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-'''
+
 """Reads messages from database for a given channel"""
-mf_resp = mfsdk.messages.read(channel_id="6a4c094d-b192-4e7b-837f-6d2a2bae12d5", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTIzMzI1ODUsImlhdCI6MTY5MjI3ODU4NSwiaWRlbnRpdHkiOiJleGFtcGxlMjBAZXhhbXBsZS5jb20iLCJpc3MiOiJjbGllbnRzLmF1dGgiLCJzdWIiOiI4N2MxZTY5MC1kMDFhLTRhN2YtOGYyNy0xZjhhOWE2ZGIwMmUiLCJ0eXBlIjoiYWNjZXNzIn0.hAJllwSCLDOqJseCKkTtw4qI9EyuBat6qaLGsvdsU-OGVS6-VkkK6boiDQ-_Men9CT6oUpzzTmW3e0dRF72j3g")
+mf_resp = mfsdk.messages.read(channel_id="<channel_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
+
+"""Issue certs"""
+mf_resp = mfsdk.certs.issue(thing_id="<thing_id>",valid="10h", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+ 
+"""View Certs"""
+mf_resp = mfsdk.certs.view_by_thing(thing_id="<thing_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+    
+"""View Certs"""
+mf_resp = mfsdk.certs.view_by_serial(cert_id="<cert_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Revoke Certs"""
+mf_resp = mfsdk.certs.revoke(thing_id="<thing_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Adds new config to the list of config owned by user identified using the provided access token."""
+config = {
+   "external_id": "<external_id>",
+  "external_key": "<external_key>",
+  "thing_id": "<thing_id>",
+  "name": "<name>"
+}
+mf_resp = mfsdk.bootstrap.add(config=config, token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+"""Updating state represents enabling/disabling Config, i.e.connecting and disconnecting corresponding Mainflux Thing to the list of Channels."""
+config = {
+   "external_id": "<external_id>",
+  "external_key": "<external_key>",
+  "thing_id": "<thing_id>",
+  "name": "<name>"
+}
+mf_resp = mfsdk.bootstrap.whitelist(config=config, token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message) 
+ 
+"""Retrieves a configuration with given config id"""
+mf_resp = mfsdk.bootstrap.view(thing_id= "<thing_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)  
+  
+"""Update is performed by replacing the current resource data with values provided in a request payload. Note that the owner, ID, external ID, external key, Mainflux Thing ID and key cannot be changed."""
+config = {
+ "external_id": "<external_id>",
+  "external_key": "<external_key>",
+  "thing_id": "<thing_id>",
+  "name": "<name>"
+}
+mf_resp = mfsdk.bootstrap.update(config=config, token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message) 
+   
+"""Retrieves a configuration with given external ID and external key."""
+mf_resp = mfsdk.bootstrap.bootstrap(external_id="<external_id>", external_key= "<external_key>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+
+"""Removes a Config. In case of successful removal the service will ensure that the removed config is disconnected from all the Mainflux channels."""
+
+mf_resp = mfsdk.bootstrap.remove(config_id= "<config_id>", token="<token>")
+if mf_resp.error.status == 0:
+    print(mf_resp.value)
+else:
+    print(mf_resp.error.message)
+    

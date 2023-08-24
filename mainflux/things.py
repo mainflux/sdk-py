@@ -248,9 +248,9 @@ class Things:
             )
         return mf_resp
     
-    def share_thing(self, user_id: str, group_id: str, actions: dict, token: str):
+    def share_thing(self, user_id: str, channel_id: str, actions: dict, token: str):
         """Share thing"""
-        payload = {"object": group_id, "subject": user_id, "Actions": actions, "External": True}
+        payload = {"object": channel_id, "subject": user_id, "Actions": actions, "External": True}
         http_resp = requests.post(
             self.URL + "/policies",
             headers=utils.construct_header(token, utils.CTJSON),
