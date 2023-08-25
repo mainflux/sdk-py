@@ -11,14 +11,14 @@
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L7"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Things`
 
 
 
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L13"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
@@ -35,7 +35,7 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L271"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L268"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `authorise_thing`
 
@@ -47,7 +47,7 @@ Authorises thing
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L217"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L216"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `connect`
 
@@ -59,7 +59,7 @@ Connects thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L183"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L182"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `connects`
 
@@ -71,7 +71,7 @@ Connects thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L17"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L16"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
@@ -83,7 +83,7 @@ Creates thing entity in the database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L34"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L33"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create_bulk`
 
@@ -95,7 +95,7 @@ Creates multiple things in a bulk
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L169"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L168"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disable`
 
@@ -107,7 +107,7 @@ Deletes a thing entity from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L235"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L234"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disconnect`
 
@@ -119,7 +119,7 @@ Disconnect thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L201"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L200"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disconnects`
 
@@ -131,7 +131,7 @@ Disconnect thing and channel
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L51"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L50"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get`
 
@@ -143,7 +143,7 @@ Gets a thing entity for a logged-in user
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L67"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L66"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_all`
 
@@ -155,7 +155,7 @@ Gets all things from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L84"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L83"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_by_channel`
 
@@ -167,19 +167,19 @@ Gets all things to which a specific thing is connected to
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L251"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L250"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `share_thing`
 
 ```python
-share_thing(user_id: str, channel_id: str, actions: dict, token: str)
+share_thing(user_id: str, channel_id: str, actions: list, token: str)
 ```
 
 Share thing 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L101"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L100"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
@@ -191,7 +191,7 @@ Updates thing entity
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L152"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L151"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_thing_owner`
 
@@ -203,7 +203,7 @@ Updates thing secret
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L118"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L117"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_thing_secret`
 
@@ -215,7 +215,7 @@ Updates thing secret
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L135"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/things.py#L134"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_thing_tags`
 
