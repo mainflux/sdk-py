@@ -19,9 +19,7 @@ thing = {
   "metadata": {
     "domain": "example.com"
   },
-  "status": "enabled",
-  "created_at": "2019-11-26 13:31:52",
-  "updated_at": "2019-11-26 13:31:52"
+  "status": "enabled"
 }
 things = [{
   "id": "4e5532c0-cf92-4ef3-ab7b-65ee30151c99",
@@ -38,9 +36,7 @@ things = [{
   "metadata": {
     "domain": "example.com"
   },
-  "status": "enabled",
-  "created_at": "2019-11-26 13:31:52",
-  "updated_at": "2019-11-26 13:31:52"
+  "status": "enabled"
 }, {
   "id": "53ed347d-f277-4e2b-9ee1-442389ad1a9a",
   "name": "thing2",
@@ -56,17 +52,23 @@ things = [{
   "metadata": {
     "domain": "example.com"
   },
-  "status": "enabled",
-  "created_at": "2019-11-26 13:31:52",
-  "updated_at": "2019-11-26 13:31:52"
+  "status": "enabled"
 }]
 thing_id = "123-456-789"
 thing_id1 = "123-223-333"
 channel_id = "654-654-654"
 channel_id1 = "654-654-654"
+user_id= "123-679-773"
+action= "m_read"
 token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 url = "http://localhost"
 params = None
+access_request= {
+    "subject": "123-456-789",
+    "object": "654-654-654",
+    "action": "m_read",
+    "entity_type": "group"
+}
 policies= {
   "policies": [
     {
@@ -249,3 +251,25 @@ def test_disconnects_bad_json(requests_mock):
     r = s.things.disconnects(channel_ids=[channel_id], thing_ids=[thing_id, thing_id1], token=token)
     assert r.error.status == 1
     assert r.error.message == "Channel or thing does not exist."
+
+def test_share_thing(requests_mock):
+    requests_mock.register_uri("POST", url + "/policies", status_code=201)
+    r = s.things.share_thing(channel_id=channel_id, user_id=user_id, actions= action, token=token)
+    assert r.error.status == 0
+
+def test_share_thing_bad_token(requests_mock):
+    requests_mock.register_uri("POST", url + "/policies", status_code=400)
+    r = s.things.share_thing(channel_id=channel_id, user_id=user_id, actions= action, token=token)
+    assert r.error.status == 1
+    assert r.error.message == "A non-existent entity request."
+    
+def test_authorise_thing(requests_mock):
+    requests_mock.register_uri("POST", url + "/channels/object/access", status_code=200)
+    r = s.things.authorise_thing(access_request=access_request , token=token)
+    assert r.error.status == 0
+
+def test_authorise_thing_bad_token(requests_mock):
+    requests_mock.register_uri("POST", url + "/channels/object/access", status_code=403)
+    r = s.things.authorise_thing(access_request=access_request , token=token)
+    assert r.error.status == 1
+    assert r.error.message == "False"

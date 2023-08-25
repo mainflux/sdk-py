@@ -1,5 +1,4 @@
 import requests
-import json
 from mainflux import response
 from mainflux import errors
 from mainflux import utils
@@ -248,16 +247,14 @@ class Things:
             )
         return mf_resp
     
-    def share_thing(self, user_id: str, channel_id: str, actions: dict, token: str):
+    def share_thing(self, user_id: str, channel_id: str, actions: list, token: str):
         """Share thing"""
-        payload = {"object": channel_id, "subject": user_id, "Actions": actions, "External": True}
+        payload = {"object": channel_id, "subject": user_id, "actions": actions, "external": True}
         http_resp = requests.post(
             self.URL + "/policies",
             headers=utils.construct_header(token, utils.CTJSON),
-            data=json.dumps(payload)
+            data=payload
         )
-        print(http_resp.request.url)
-        print(http_resp)
         mf_resp = response.Response()
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
@@ -265,14 +262,14 @@ class Things:
                 errors.things["share_thing"], http_resp.status_code
             )
         else:
-            mf_resp.value = http_resp.json()
+            mf_resp.value = "OK"
         return mf_resp
     
     def authorise_thing(self,access_request: dict, token: str):
         """Authorises thing"""
         mf_resp = response.Response()
         http_resp= requests.post(
-            self.URL +"/authorize",
+            self.URL +"/channels/object/access",
             headers=utils.construct_header(token, utils.CTJSON),
             json= access_request
         )

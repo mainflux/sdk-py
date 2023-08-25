@@ -136,7 +136,6 @@ def test_delete_group_does_not_exist(requests_mock):
     assert r.error.message == "Group does not exist."
 
 def test_share_groups(requests_mock):
-    requests_mock.register_uri("POST", url + "/groups/" + group_id + "/share", status_code=200,
-                               headers={"Authorization": token}, json={"thing_group_id": thing_group_id})
+    requests_mock.register_uri("POST", url + "/groups/" + group_id + "/share", status_code=200, headers={"Authorization": token}, json={"thing_group_id": thing_group_id})
     r = s.groups.share_groups(token=token, user_group_id=group_id, thing_group_id=thing_group_id)
     assert r.error.status == 0

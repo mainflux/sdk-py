@@ -66,6 +66,12 @@ token = {
   "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
   "access_type": "access"
 }
+access_request ={
+    "subject": "e2c769b8-8b8c-4886-8b19-e155c4d363e6",
+    "object": "f20e0b0e-b05e-401e-ac53-59b99eea3519",
+    "action": "g_add",
+    "entity_type": "client"
+}
 password= "12345678"
 confirm_password="12345678"
 email={"admin@example.com": "email"}
@@ -98,13 +104,13 @@ def test_login_user_bad_email(requests_mock):
     
 def test_refresh_token(requests_mock):
     requests_mock.register_uri("POST", url + "/users/tokens/refresh", json=token, status_code=201)
-    r = s.users.refresh_token(user=user, token=token["refresh_token"])
+    r = s.users.refresh_token(refresh_token=token["refresh_token"])
     assert r.error.status == 0
     assert token == r.value
 
 def test_refresh_token_bad_token(requests_mock):
     requests_mock.register_uri("POST", url + "/users/tokens/refresh",json=token, status_code=404)
-    r = s.users.refresh_token(user=user, token=token["refresh_token"])
+    r = s.users.refresh_token(refresh_token=token["refresh_token"])
     assert r.error.status == 1
     assert r.error.message == "A non-existent entity request."
 
@@ -233,3 +239,15 @@ def test_disable_user_bad_user(requests_mock):
     r = s.users.disable(user_id=user["id"], user_token= token["access_token"])
     assert r.error.status == 1
     assert r.error.message == "Failed due to non existing user."
+
+def test_authorise_user(requests_mock):
+    requests_mock.register_uri("POST", url + "/authorize", status_code=200)
+    r = s.users.authorise_user(access_request=access_request , token=token["access_token"])
+    assert r.error.status == 0
+
+def test_authorise_user_bad_token(requests_mock):
+    requests_mock.register_uri("POST", url + "/authorize", status_code=400)
+    r = s.users.authorise_user(access_request=access_request , token=token["access_token"])
+    assert r.error.status == 1
+    assert r.error.message == "Failed due to malformed JSON." 
+      

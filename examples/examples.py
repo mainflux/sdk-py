@@ -21,11 +21,11 @@ mf_resp = mfsdk.users.create(
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
-    print(mf_resp.error.message)  
-
+    print(mf_resp.error.message)
+  
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "<user_identity>", "secret": "<user_secret>"}
+    user={ "identity" : "admin@example.com", "secret": "12345678"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -33,17 +33,9 @@ else:
     print(mf_resp.error.message)
 
 """Refreshes Access and Refresh Token used for authenticating into the system."""
-user= {
-  "credentials": {
-    "identity": "<user_identity>",
-    "secret": "<user_secret>"
-  },
-  "id": "<user_id>",
-  "name": "<user_name>"
-}
+
 mf_resp = mfsdk.users.refresh_token(
-    user= user,
-    token="<refresh_token>"
+    refresh_token="<refresh_token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -75,7 +67,7 @@ else:
 """Updates user identity in the database"""
 user = {
   "credentials": {
-    "identity": "<user_identity>",
+    "identity": "<new_user_identity>",
   },
   "id": "<user_id>"
 }
@@ -165,10 +157,10 @@ else:
 
 """Authorising a User"""
 access_request = {
-    "subject": "",
-    "object": "",
-    "Action": "",
-    "Entity_type": ""
+    "subject": "<user_id>",
+    "object": "<group_id>",
+    "action": "<action>",
+    "entity_type": "<entity_type>"
 }
 mf_resp = mfsdk.users.authorise_user(access_request=access_request, token="<token>")
 if mf_resp.error.status == 0:
@@ -178,10 +170,10 @@ else:
 
 """Authorising a Thing"""
 access_request = {
-    "subject": "",
-    "object": "",
-    "Action": "",
-    "Entity_type": ""
+    "subject": "<thing_id>",
+    "object": "<channel_id>",
+    "action": "<action>",
+    "entity_type": "<entity_type>"
 }
 mf_resp = mfsdk.things.authorise_thing(access_request=access_request, token="<token>")
 if mf_resp.error.status == 0:
@@ -292,7 +284,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="<channel_id>", thing_id="<thing_id>", action="<action>", token="<token>"
+    channel_id="4921c9f2-6b7b-4291-98bf-fefd4a43591d", thing_id="d58ca9f5-e5f1-4a1b-9063-0c31ff9ba298", action="m_read", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTI5MzI0MjMsImlhdCI6MTY5Mjg3ODQyMywiaWRlbnRpdHkiOiJkZXRlcm1pbmVkX3JvZW50Z2VuQGVtYWlsLmNvbSIsImlzcyI6ImNsaWVudHMuYXV0aCIsInN1YiI6IjVhN2M1NGExLTgzMzUtNDBiNy1hOTE3LTc2MmZmYmFmOGFkOSIsInR5cGUiOiJhY2Nlc3MifQ.s74K5y6k9Hjzhi3MNU0cX1U9lKpJiRUwrIBLWgw_fcXUeMUN9HAIidu0sWj-iGxI6c-KUUy993I9yNIBOrUqaw"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -312,7 +304,7 @@ else:
 mf_resp = mfsdk.things.connects(
     thing_ids=["<thing_id>", "<thing_id>"],
     channel_ids=["<channel_ids>"],
-    action="<action>",
+    actions="<action>",
     token="<token>",
 )
 
@@ -334,16 +326,16 @@ else:
 
 """Share thing"""
 mf_resp = mfsdk.things.share_thing(
-    channel_id= "<object>", 
-    user_id= "<subject>", 
-    actions= ["action"], 
-    token= "<token>"
+    channel_id= "<channel_id>", 
+    user_id= "<user_id>", 
+    actions= ["<actions>"], 
+    token= "<admin_token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message) 
- 
+
 """To create a channel, you need a channel and a token"""
 mf_resp = mfsdk.channels.create(
     channel={"name": "<channel_name>"}, token="<token>")
@@ -401,7 +393,7 @@ else:
     print(mf_resp.error.message)
 
 """Identifies thing when given thing key"""
-mf_resp = mfsdk.channels.identify_thing(thing_key="<thing_secret>", user_token="<token>")
+mf_resp = mfsdk.channels.identify_thing(thing_key="<thing_secret>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -417,7 +409,7 @@ else:
 
 """To create a group, you need the group name and a user token"""
 mf_resp = mfsdk.groups.create(
-    group={"name": "<group_nme>", "parent_id": "<group_id>"}, token="<token>")
+    group={"name": "group_auth", "parent_id": ""}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -579,6 +571,7 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
+    
 """Updating state represents enabling/disabling Config, i.e.connecting and disconnecting corresponding Mainflux Thing to the list of Channels."""
 config = {
    "external_id": "<external_id>",
@@ -620,10 +613,9 @@ else:
     print(mf_resp.error.message)
 
 """Removes a Config. In case of successful removal the service will ensure that the removed config is disconnected from all the Mainflux channels."""
-
 mf_resp = mfsdk.bootstrap.remove(config_id= "<config_id>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-    
+  

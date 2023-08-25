@@ -97,3 +97,4 @@ def test_remove_bad_config(requests_mock):
     r = s.bootstrap.remove(config_id=config_id, token=token)
     assert r.error.status == 1
     assert r.error.message == "Failed due to malformed config ID."
+    

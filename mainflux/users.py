@@ -1,5 +1,4 @@
 import requests
-import json
 
 from mainflux import response
 from mainflux import errors
@@ -43,14 +42,13 @@ class Users:
             mf_resp.value = http_resp.json()
         return mf_resp
     
-    def refresh_token(self, user: dict, token: str):
+    def refresh_token(self, refresh_token: str):
         """Refreshes Access and Refresh Token used for authenticating into the system."""
         mf_resp = response.Response()
         http_resp = requests.post(
             self.URL + "/users/tokens/refresh", 
-            headers=utils.construct_header(token, utils.CTJSON),
-            json=user
-        )
+            headers=utils.construct_header(refresh_token, utils.CTJSON),
+            )
         if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
@@ -98,7 +96,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"],
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=json.dumps(user),
+            data=user,
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -115,7 +113,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/identity",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=json.dumps(user),
+            data=user,
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -132,7 +130,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/tags",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=json.dumps(user),
+            data=user,
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -149,7 +147,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/owner",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=json.dumps(user),
+            data=user,
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -261,3 +259,4 @@ class Users:
         else:
             mf_resp.value = "True"
         return mf_resp
+    

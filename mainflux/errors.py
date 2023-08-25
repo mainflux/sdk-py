@@ -105,8 +105,8 @@ things = {
         400: "A non-existent entity request."
     },
     "authorise_thing":{
-        400: "False"
-    }
+        403: "False",
+    },
 }
 
 channels = {
