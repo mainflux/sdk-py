@@ -24,7 +24,7 @@ def test_add(requests_mock):
     requests_mock.register_uri( "POST", url+ "/things/configs", headers={"location": "/configs/" + thing_id}, json=config, status_code=201)
     r = s.bootstrap.add(config=config, token=token)
     assert r.error.status == 0
-    assert r.value == "added"
+    assert r.value == "Configuration added"
 
 def test_add_bad_token(requests_mock):
     requests_mock.register_uri( "POST", url+ "/things/configs", headers={"location": "/configs/" + thing_id}, json=config, status_code=401)
@@ -36,7 +36,7 @@ def test_whitelist(requests_mock):
     requests_mock.register_uri( "PUT", url+ "/things/state/" + config["thing_id"], json=config, status_code=201)
     r = s.bootstrap.whitelist(config=config, token=token)
     assert r.error.status == 0
-    assert r.value == "OK"
+    assert r.value == "Configuration Updated"
     
 def test_whitelist_bad_config(requests_mock):
     requests_mock.register_uri( "PUT", url+ "/things/state/" + config["thing_id"], json=config, status_code=400)
@@ -66,7 +66,7 @@ def test_update(requests_mock):
     requests_mock.register_uri( "PUT", url+ "/things/configs/" + config["thing_id"], json=config, status_code=200)
     r = s.bootstrap.update(config=config, token=token)
     assert r.error.status == 0
-    assert r.value == "Config updated."
+    assert r.value == "Configuration updated."
 
 def test_update_bad_config(requests_mock):
     requests_mock.register_uri( "PUT", url+ "/things/configs/" + config["thing_id"], json=config, status_code=404)
@@ -90,7 +90,7 @@ def test_remove(requests_mock):
     requests_mock.register_uri( "DELETE", url+ "/things/configs/" + config_id, status_code=204)
     r = s.bootstrap.remove(config_id=config_id, token=token)
     assert r.error.status == 0
-    assert r.value== "Config removed."
+    assert r.value== "Configuration removed."
 
 def test_remove_bad_config(requests_mock):
     requests_mock.register_uri( "DELETE", url+ "/things/configs/" + config_id, status_code=400)
