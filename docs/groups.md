@@ -143,18 +143,6 @@ Gets parents for a specific group from database
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L198"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
-
-### <kbd>method</kbd> `share_groups`
-
-```python
-share_groups(token: str, user_group_id: str, thing_group_id: str)
-```
-
-Adds access rights on thing groups to the user group 
-
----
-
 <a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L168"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `unassign`

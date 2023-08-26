@@ -136,7 +136,7 @@ class Channels:
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.channels["get_by_thing"], http_resp.status_code
+                errors.channels["identify_thing"], http_resp.status_code
             )
         else:
             mf_resp.value = http_resp.json()

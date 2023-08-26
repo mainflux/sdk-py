@@ -29,7 +29,7 @@ class Bootstrap:
                 errors.bootstrap["add"], http_resp.status_code
             )
         else:
-            mf_resp.value = "added"
+            mf_resp.value = "Configuration added"
         return mf_resp
 
     def whitelist(self, config: dict, token: str):
@@ -51,7 +51,7 @@ class Bootstrap:
                 errors.bootstrap["whitelist"], http_resp.status_code
             )
         else:
-            mf_resp.value = "OK"
+            mf_resp.value = "Configuration Updated"
         return mf_resp
 
     def view(self, thing_id: str, token: str):
@@ -90,7 +90,7 @@ class Bootstrap:
                 errors.bootstrap["update"], http_resp.status_code
             )
         else:
-            mf_resp.value = "Config updated."
+            mf_resp.value = "Configuration updated."
         return mf_resp
 
     def update_certs(
@@ -129,7 +129,7 @@ class Bootstrap:
                 errors.bootstrap["remove"], http_resp.status_code
             )
         else:
-             mf_resp.value = "Config removed."
+             mf_resp.value = "Configuration removed."
         return mf_resp
 
     def bootstrap(self, external_id: str, external_key: str):

@@ -55,7 +55,6 @@ class Certs:
             self.url + "/" + self.certs_endpoint + "/" + cert_id,
             headers=utils.construct_header(token, utils.CTJSON),
         )
-        print(http_resp.url)
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
@@ -66,13 +65,11 @@ class Certs:
         return mf_resp
 
     def revoke(self, thing_id: str, token: str):
-
         mf_resp = response.Response()
         http_resp = requests.delete(
             self.url + "/" + self.certs_endpoint + "/" + thing_id,
             headers=utils.construct_header(token, utils.CTJSON),
         )
-        
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(

@@ -75,7 +75,7 @@ class Groups:
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.groups["get_all"], http_resp.status_code
+                errors.groups["parents"], http_resp.status_code
             )
         else:
             mf_resp.value = http_resp.json()
@@ -143,7 +143,7 @@ class Groups:
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
-                errors.groups["members"], http_resp.status_code
+                errors.groups["memberships"], http_resp.status_code
             )
         else:
              mf_resp.value = http_resp.json()
@@ -192,21 +192,5 @@ class Groups:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.groups["disable"], http_resp.status_code
-            )
-        return mf_resp
-
-    def share_groups(self, token: str, user_group_id: str, thing_group_id: str):
-        """Adds access rights on thing groups to the user group"""
-        mf_resp = response.Response()
-        http_resp = requests.post(
-            self.url + "/" + self.groups_endpoint + "/" + user_group_id +
-            "/share",
-            headers=utils.construct_header(token, utils.CTJSON),
-            json=thing_group_id,
-        )
-        if http_resp.status_code != 200:
-            mf_resp.error.status = 1
-            mf_resp.error.message = errors.handle_error(
-                errors.groups["assign"], http_resp.status_code
             )
         return mf_resp

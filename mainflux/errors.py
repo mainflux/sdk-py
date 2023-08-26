@@ -111,13 +111,13 @@ things = {
 
 channels = {
     "create": {
-
+        409: "Failed due to using an existing identity."
     },
     "create_bulk": {
-
+        401: "Missing or invalid access token provided."
     },
     "get": {
-
+        401: "Missing or invalid access token provided."
     },
     "get_all": {
         400: "Failed due to malformed channel's ID.",
@@ -132,6 +132,9 @@ channels = {
     },
     "delete": {
         400: "Failed due to malformed channel's ID."
+    },
+    "identify_thing":{
+        401: "Thing and channel are not connected, or thing with specified key doesn't exist."
     },
 }
 
@@ -166,9 +169,18 @@ groups = {
     "members": {
         409: "Failed due to using an existing email address.",
     },
-    "assign": {
-
+    "memberships":{
+        400: "Failed due to malformed query parameters."  
     },
+    "parents": {
+        400: "Failed due to malformed query parameters."
+    },
+    "children": {
+        400: "Failed due to malformed query parameters."
+    },
+    "assign": {
+        400: "Failed due to malformed JSON."
+    }, 
     "unassign": {
         400: "Failed due to malformed query parameters.",
         404: "Group does not exist.",

@@ -49,7 +49,7 @@ issue(thing_id: str, valid: str, token: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L68"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/certs.py#L67"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `revoke`
 
