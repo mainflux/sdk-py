@@ -128,12 +128,12 @@ def test_membership_bad_content_type(requests_mock):
 
 def test_assign(requests_mock):
     requests_mock.register_uri("POST", url + "/users/policies" , status_code=200)
-    r = s.groups.assign(group_id=group_id, token=token, members_ids=members, member_type= ["m_read"])
+    r = s.groups.assign(group_id=group_id, token=token, member_id=members, member_type= ["m_read"])
     assert r.error.status == 0
 
 def test_assign_malformed_json(requests_mock):
     requests_mock.register_uri("POST", url + "/users/policies", status_code=400)
-    r = s.groups.assign(group_id=group_id, token=token, members_ids=members, member_type= ["m_read"])
+    r = s.groups.assign(group_id=group_id, token=token, member_id=members, member_type= ["m_read"])
     assert r.error.status == 1
     assert r.error.message == "Failed due to malformed JSON."
 

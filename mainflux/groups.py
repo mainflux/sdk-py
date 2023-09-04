@@ -1,5 +1,4 @@
 import requests
-import json
 
 from mainflux import response
 from mainflux import errors
@@ -67,8 +66,7 @@ class Groups:
         mf_resp = response.Response()
 
         http_resp = requests.get(
-            self.url + "/" + self.groups_endpoint + "/" + group_id +
-            "/parents",
+            self.url + "/" + self.groups_endpoint + "/" + group_id + "/parents",
             headers=utils.construct_header(token, utils.CTJSON),
             params=query_params,
         )
@@ -102,7 +100,7 @@ class Groups:
         """Updates group entity"""
         http_resp = requests.put(
             self.url + "/" + self.groups_endpoint + "/" + group_id,
-            data= json.dumps(group),
+            data=group,
             headers=utils.construct_header(token, utils.CTJSON),
         )
         mf_resp = response.Response()
@@ -112,7 +110,7 @@ class Groups:
                 errors.groups["update"], http_resp.status_code
             )
         else:
-             mf_resp.value = http_resp.json()
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def members(self, group_id: str, query_params: dict, token: str):
@@ -129,7 +127,7 @@ class Groups:
                 errors.groups["members"], http_resp.status_code
             )
         else:
-             mf_resp.value = http_resp.json()
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def memberships(self, member_id: str, query_params: dict, token: str):
@@ -146,17 +144,17 @@ class Groups:
                 errors.groups["memberships"], http_resp.status_code
             )
         else:
-             mf_resp.value = http_resp.json()
+            mf_resp.value = http_resp.json()
         return mf_resp
 
-    def assign(self, group_id: str, members_ids: str, member_type: dict, token: str):
+    def assign(self, group_id: str, member_id: str, member_type: list, token: str):
         """Assign"""
-        payload = {"Object": group_id, "Subject": members_ids, "Actions": member_type}
+        payload = {"object": group_id, "subject": member_id, "actions": member_type}
         mf_resp = response.Response()
         http_resp = requests.post(
             self.url + "/users/policies",
             headers=utils.construct_header(token, utils.CTJSON),
-            json= payload,
+            json=payload,
         )
         if http_resp.status_code != 200:
             mf_resp.error.status = 1

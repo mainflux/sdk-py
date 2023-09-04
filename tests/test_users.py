@@ -249,5 +249,4 @@ def test_authorise_user_bad_token(requests_mock):
     requests_mock.register_uri("POST", url + "/authorize", status_code=400)
     r = s.users.authorise_user(access_request=access_request , token=token["access_token"])
     assert r.error.status == 1
-    assert r.error.message == "Failed due to malformed JSON." 
-      
+    assert r.error.message == "Failed due to malformed JSON."

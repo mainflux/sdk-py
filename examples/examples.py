@@ -409,7 +409,7 @@ else:
 
 """To create a group, you need the group name and a user token"""
 mf_resp = mfsdk.groups.create(
-    group={"name": "group_auth", "parent_id": ""}, token="<token>")
+    group={"name": "group_name"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -444,12 +444,12 @@ if mf_resp.error.status == 0:
 else:
     print(mf_resp.error.message)
 
-"""Assign user, thing or channel to a group"""
+"""Assign user to a group"""
 mf_resp = mfsdk.groups.assign(
-    group_id="<object>",
+    group_id="<group_id>",
     token="<token>",
-    members_ids="<subject>",
-    member_type=["<actions>"],
+    member_id="<member_id>",
+    member_type=["<member_type>"],
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)

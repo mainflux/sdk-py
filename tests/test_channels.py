@@ -92,12 +92,12 @@ def test_get_by_thing_does_not_exist(requests_mock):
     assert r.error.message == "Thing does not exist."
 
 def test_update_channel(requests_mock):
-    requests_mock.register_uri("PUT", url + "/channels/" + channel_id, json=json.dumps(channel), status_code=200)
+    requests_mock.register_uri("PUT", url + "/channels/" + channel_id, json=channel, status_code=200)
     r = s.channels.update(channel_id=channel_id, token=token, channel=channel)
     assert r.error.status == 0
 
 def test_update_channel_does_not_exist(requests_mock):
-    requests_mock.register_uri("PUT", url + "/channels/" + channel_id, json=json.dumps(channel), status_code=404)
+    requests_mock.register_uri("PUT", url + "/channels/" + channel_id, json=channel, status_code=404)
     r = s.channels.update(channel_id=channel_id, token=token, channel=channel)
     assert r.error.status == 1
     assert r.error.message == "Channel does not exist."
@@ -126,4 +126,3 @@ def test_identify_thing_bad_key(requests_mock):
     r = s.channels.identify_thing(thing_key)
     assert r.error.status == 1
     assert r.error.message == "Thing and channel are not connected, or thing with specified key doesn't exist."
-    
