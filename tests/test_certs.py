@@ -59,7 +59,7 @@ def test_revoke(requests_mock):
     r = s.certs.revoke(thing_id=thing_id, token=token)
     assert r.error.status == 0
     
-def test_revoke(requests_mock):
+def test_revoke_bad_response(requests_mock):
     requests_mock.register_uri( "DELETE", url + "/certs" + "/" + thing_id, status_code=404)
     r = s.certs.revoke(thing_id=thing_id, token=token)
     assert r.error.status == 1
