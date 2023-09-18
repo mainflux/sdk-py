@@ -33,7 +33,7 @@ __init__(
     http_adapter_url='http://localhost',
     certs_url='http://localhost',
     bootstrap_url='http://localhost',
-    auth_url='http://localhost'
+    groups_url='http://localhost'
 )
 ```
 

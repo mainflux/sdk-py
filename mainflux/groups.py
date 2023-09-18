@@ -114,7 +114,7 @@ class Groups:
         return mf_resp
 
     def members(self, group_id: str, query_params: dict, token: str):
-        """Get list of members ID's from group"""
+        """Gets members associated with the group specified by id"""
         http_resp = requests.get(
             self.url + "/" + self.groups_endpoint + "/" + group_id + "/members",
             headers=utils.construct_header(token, utils.CTJSON),

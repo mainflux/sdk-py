@@ -115,7 +115,7 @@ Gets all groups from database
 members(group_id: str, query_params: dict, token: str)
 ```
 
-Get list of members ID's from group 
+Gets members associated with the group specified by id 
 
 ---
 

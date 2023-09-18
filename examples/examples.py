@@ -22,10 +22,10 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-  
+
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "admin@example.com", "secret": "12345678"}
+    user={ "identity" : "admin@example.com", "secret": "<secret>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -130,7 +130,7 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-    
+   
 """Disables user"""
 mf_resp = mfsdk.users.disable(user_id="<user_id>", user_token="<token>")
 if mf_resp.error.status == 0:
@@ -284,7 +284,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="4921c9f2-6b7b-4291-98bf-fefd4a43591d", thing_id="d58ca9f5-e5f1-4a1b-9063-0c31ff9ba298", action="m_read", token="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTI5MzI0MjMsImlhdCI6MTY5Mjg3ODQyMywiaWRlbnRpdHkiOiJkZXRlcm1pbmVkX3JvZW50Z2VuQGVtYWlsLmNvbSIsImlzcyI6ImNsaWVudHMuYXV0aCIsInN1YiI6IjVhN2M1NGExLTgzMzUtNDBiNy1hOTE3LTc2MmZmYmFmOGFkOSIsInR5cGUiOiJhY2Nlc3MifQ.s74K5y6k9Hjzhi3MNU0cX1U9lKpJiRUwrIBLWgw_fcXUeMUN9HAIidu0sWj-iGxI6c-KUUy993I9yNIBOrUqaw"
+    channel_id="<channel_id>", thing_id="<thing_id>", action="m_read", token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -338,7 +338,7 @@ else:
 
 """To create a channel, you need a channel and a token"""
 mf_resp = mfsdk.channels.create(
-    channel={"name": "<channel_name>"}, token="<token>")
+    channel={"name": "<groupname>"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:

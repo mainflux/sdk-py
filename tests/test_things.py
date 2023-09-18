@@ -231,12 +231,12 @@ def test_connect_non_existing_entity(requests_mock):
     assert r.error.message == "A non-existent entity request."
 
 def test_disconnect_thing(requests_mock):
-    requests_mock.register_uri("POST", url + "/disconnect", status_code=204)
+    requests_mock.register_uri("DELETE", url + "/policies" + "/" + thing_id + "/" + channel_id, status_code=204)
     r = s.things.disconnect(channel_id=channel_id, thing_id=thing_id, token=token)
     assert r.error.status == 0
     
 def test_disconnect_thing_or_channel_does_not_exist(requests_mock):
-    requests_mock.register_uri("POST", url + "/disconnect", status_code=404)
+    requests_mock.register_uri("DELETE", url + "/policies" + "/" + thing_id + "/" + channel_id, status_code=404)
     r = s.things.disconnect(channel_id=channel_id, thing_id=thing_id, token=token)
     assert r.error.status == 1
     assert r.error.message == "Channel or thing does not exist."

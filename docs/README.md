@@ -27,7 +27,7 @@
 - [`response.Response`](./response.md#class-response)
 - [`sdk.SDK`](./sdk.md#class-sdk)
 - [`things.Things`](./things.md#class-things)
-- [`users.Users`](./users.md#class-users)
+- [`users.Users`](./users.md#class-users): Users API client.
 
 ## Functions
 

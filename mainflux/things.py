@@ -234,8 +234,8 @@ class Things:
     def disconnect(self, thing_id: str, channel_id: str, token: str):
         """Disconnect thing and channel"""
         payload = {"subject": thing_id, "object": channel_id}
-        http_resp = requests.post(
-            self.URL + "/disconnect",
+        http_resp = requests.delete(
+            self.URL + "/policies" + "/" + thing_id + "/" + channel_id,
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
