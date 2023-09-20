@@ -42,7 +42,7 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L647"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L633"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `authorise_user`
 
@@ -63,7 +63,7 @@ params:  access_request = {  "subject": "<user_id>",  "object": "<group_id>",  "
  - <b>`mf_resp`</b>:  "True" 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.authorise_user(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> access_request = {     ...     "subject": "<user_id>",     ...     "object": "<group_id>",     ...     "action": "<action>",     ...     "entity_type": "<entity_type>"     ...     }     >>> mf_resp = mfsdk.users.authorise_user(access_request, token)     >>> mf_resp             
 
 ---
 
@@ -79,9 +79,7 @@ Creates a new user.
 
 Creates a new user with provided user information. If token is provided, it will be used to create a new user. 
 
-params:  user: dict - user information for example:  
-
- {  "name": "example",  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  }  }  token: str - token used for creating a new user  
+params:  user: dict - user information for example:  {  "name": "example",  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  }  }  token: str - token used for creating a new user  
 
 
 
@@ -94,7 +92,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L615"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L601"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disable`
 
@@ -113,11 +111,11 @@ params:  user_id: str - the user's given ID.  token: str - token used for enabli
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.disable(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.disable(user_id, user_token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L581"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L567"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `enable`
 
@@ -138,11 +136,11 @@ params:  user_id: str - the user's given ID.  token: str - token used for enabli
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.enable(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.enable(user_id, user_token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L166"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L156"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get`
 
@@ -163,11 +161,11 @@ params:  user_id: str - user information eg "886b4266-77d1-4258-abae-2931fb4f16d
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id = "886b4266-77d1-4258-abae-2931fb4f16de"     >>> mf_resp = mfsdk.users.get(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user_id = "886b4266-77d1-4258-abae-2931fb4f16de"     >>> token = ""     >>> mf_resp = mfsdk.users.get(user_id, token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L201"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L192"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_all`
 
@@ -190,11 +188,11 @@ params:   user_token: str - token used for creating a new user  query_params: di
 Usage:
 ``` 
 
-      >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> query_params = {     ...     "offset" : 0, "limit" : 10     ...     }     >>> mf_resp = mfsdk.users.get(user)     >>> mf_resp         
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> query_params = {     ...     "offset" : 0, "limit" : 10     ...     }     >>> mf_resp = mfsdk.users.get(query_params, user_token)     >>> mf_resp         
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L85"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L84"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `login`
 
@@ -206,7 +204,7 @@ Generates an access token when provided with proper credentials.
 
 Issues a new access and refresh token for a user for authenticating  into the system. 
 
-params:   user: a dict with the user information and password.   {  "identity": "user@mainflux.com",  "secret": "12345678"  } 
+params:   user: a dict with the user information and password for example:   {"credentials":{  "identity": "user@mainflux.com",  "secret": "12345678"  }  } 
 
 **returns:**
  
@@ -215,11 +213,11 @@ params:   user: a dict with the user information and password.   {  "identity": 
 Usage:
 ```  
 
-    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...     "name": "example",     ...     "credentials": {     ...         "identity": "user@mainflux.com",     ...         "secret": "12345678"     ...     }     ... }     >>> mf_resp = mfsdk.users.login(user)     >>> mf_resp                 
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> credentials= {     ...         "identity": "user@mainflux.com",     ...         "secret": "12345678"     ... }     >>> mf_resp = mfsdk.users.login(credentials)     >>> mf_resp                 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L125"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L122"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `refresh_token`
 
@@ -242,11 +240,11 @@ params:   refresh_token: str - token used to refresh access.
 Usage:
 ```  
 
-    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...     "name": "example",     ...     "credentials": {     ...         "identity": "example@mail.com",     ...         "secret": "12345678"     ...     }     ... }     >>> mf_resp = mfsdk.users.refresh_token(user)     >>> mf_resp 
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> mf_resp = mfsdk.users.refresh_token(refresh_token)     >>> mf_resp 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L546"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L523"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `reset_password`
 
@@ -266,9 +264,12 @@ params:   passwor: str - the user's new password.  confirm_password: str - a rec
  
  - <b>`mf_resp`</b>:  "OK" 
 
+Usage:
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     ... password = 234567     ... confirm_password = 234567     >>> mf_resp = mfsdk.users.reset_password(password, confirm_password, token)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L517"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L485"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `reset_password_request`
 
@@ -288,9 +289,12 @@ params:  referrer email: str - this is the host being sent by the browser.  the 
  
  - <b>`mf_resp`</b>:  response.Response - response object 
 
+Usage:
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     ... email = admin@example.com     ... url = stp@gmail.com     >>> mf_resp = mfsdk.users.reset_password_request(email, url)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L245"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L236"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
@@ -302,9 +306,7 @@ Updates information on currently logged in user.
 
 Information such as name and metadata is updated using authorization user_token 
 
-params:  user: dict - user information for example:  
-
- {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  },  "metadata": {  "foo": "bar"  }  }  token: str - token used for creating a new user  
+params:  user: dict - user information for example:  {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  },  "metadata": {  "foo": "bar"  }  }  token: str - token used for creating a new user  
 
 
 
@@ -313,11 +315,11 @@ params:  user: dict - user information for example:
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {          "name": "example",          "id": "886b4266-77d1-4258-abae-2931fb4f16de"          "credentials": {              "identity": "example@main.com",              "secret": "12345678"          },          "metadata": {              "foo": "bar"          }     }     >>> mf_resp = mfsdk.users.update(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...     "name": "example",     ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de"     ...     "metadata": {     ...            "foo": "bar"     ...        }     ... }     >>> mf_resp = mfsdk.users.update(user, token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L478"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L446"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_password`
 
@@ -338,11 +340,11 @@ params:  old_secret: str - the logged in user's current secret.  new_secret: str
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> old_secret = old_secret     >>> new_secret = new_secret     >>> mf_resp = mfsdk.users.update(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     ... old_secret = 12345678     ... new_secret = 87654321     >>> mf_resp = mfsdk.users.update(old_secret, new_secret, user_token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L302"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L288"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_user_identity`
 
@@ -365,11 +367,11 @@ params:  user: dict - user information for example:
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {          "name": "example",          "id": "886b4266-77d1-4258-abae-2931fb4f16de"          "credentials": {              "identity": "example@main.com",              "secret": "12345678"          },          "metadata": {              "foo": "bar"          }     }     >>> mf_resp = mfsdk.users.update_user_idenity(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...    "name": "example",     ...    "id": "886b4266-77d1-4258-abae-2931fb4f16de"     ...    "credentials": {     ...        "identity": "example@main.com",     ...        "secret": "12345678"     ...    },     ...    "metadata": {     ...        "foo": "bar"     ...     }     ... }     >>> mf_resp = mfsdk.users.update_user_identity(user, user_token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L421"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L400"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_user_owner`
 
@@ -383,7 +385,7 @@ Updates owner for the user with provided ID. Owner is updated using  authorizati
 
 params:  user: dict - user information for example:  
 
- {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "tags": [  "yello",  "orange"  ]  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  },  "metadata": {  "foo": "bar"  },  "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"  }  token: str - token used for creating a new user  
+ {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"  }  token: str - token used for creating a new user  
 
 
 
@@ -392,11 +394,11 @@ params:  user: dict - user information for example:
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {          "name": "example",          "id": "886b4266-77d1-4258-abae-2931fb4f16de",          "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"     }     >>> mf_resp = mfsdk.users.update(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...     "name": "example",     ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de",     ...     "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"     ... }     >>> mf_resp = mfsdk.users.update_user_owner(user, user_token)     >>> mf_resp             
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L359"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/users.py#L345"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_user_tags`
 
@@ -410,7 +412,7 @@ Updates tags of the user with provided ID. Tags is updated using  authorization 
 
 params:  user: dict - user information for example:  
 
- {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "tags": [  "yello",  "orange"  ]  "credentials": {  "identity": "example@main.com",  "secret": "12345678"  },  "metadata": {  "foo": "bar"  }  }  token: str - token used for creating a new user  
+ {  "name": "example",  "id": "886b4266-77d1-4258-abae-2931fb4f16de"  "tags": [  "back",  "end"  ]  "metadata": {  "foo": "bar"  }  }  token: str - token used for creating a new user  
 
 
 
@@ -419,7 +421,7 @@ params:  user: dict - user information for example:
  - <b>`mf_resp`</b>:  response.Response - response object 
 
 Usage:
-```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {          "name": "example",          "id": "886b4266-77d1-4258-abae-2931fb4f16de"          "credentials": {              "identity": "example@main.com",              "secret": "12345678"          },          "metadata": {              "foo": "bar"          }     }     >>> mf_resp = mfsdk.users.update(user)     >>> mf_resp             
+```          >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> user = {     ...     "name": "example",     ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de"     ...     "tags": [     ...        "back",     ...        "end"     ...     ]     ... }     >>> mf_resp = mfsdk.users.update_user_tags(user, user_token)     >>> mf_resp             
 
 
 

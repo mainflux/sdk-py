@@ -40,7 +40,6 @@ class Users:
 
         params:
             user: dict - user information for example:
-            
             {
                 "name": "example",
                 "credentials": {
@@ -89,10 +88,11 @@ class Users:
         into the system.
         
         params: 
-            user: a dict with the user information and password. 
-            {
+            user: a dict with the user information and password for example: 
+            {"credentials":{
                 "identity": "user@mainflux.com",
                 "secret": "12345678"
+                }
             }
         returns: 
             mf_resp: response.Response - response object
@@ -101,14 +101,11 @@ class Users:
         
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
-            >>> user = {
-            ...     "name": "example",
-            ...     "credentials": {
+            >>> credentials= {
             ...         "identity": "user@mainflux.com",
             ...         "secret": "12345678"
-            ...     }
             ... }
-            >>> mf_resp = mfsdk.users.login(user)
+            >>> mf_resp = mfsdk.users.login(credentials)
             >>> mf_resp                
         """
         mf_resp = response.Response()
@@ -139,14 +136,7 @@ class Users:
 
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
-            >>> user = {
-            ...     "name": "example",
-            ...     "credentials": {
-            ...         "identity": "example@mail.com",
-            ...         "secret": "12345678"
-            ...     }
-            ... }
-            >>> mf_resp = mfsdk.users.refresh_token(user)
+            >>> mf_resp = mfsdk.users.refresh_token(refresh_token)
             >>> mf_resp
         """
         mf_resp = response.Response()
@@ -181,7 +171,8 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user_id = "886b4266-77d1-4258-abae-2931fb4f16de"
-            >>> mf_resp = mfsdk.users.get(user)
+            >>> token = ""
+            >>> mf_resp = mfsdk.users.get(user_id, token)
             >>> mf_resp            
         """
         mf_resp = response.Response()
@@ -218,12 +209,12 @@ class Users:
         
         Usage::
 
-             >>> from mainflux import sdk
+            >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> query_params = {
             ...     "offset" : 0, "limit" : 10
             ...     }
-            >>> mf_resp = mfsdk.users.get(user)
+            >>> mf_resp = mfsdk.users.get(query_params, user_token)
             >>> mf_resp        
         """
         http_resp = requests.get(
@@ -249,7 +240,6 @@ class Users:
 
         params:
             user: dict - user information for example:
-            
             {
                 "name": "example",
                 "id": "886b4266-77d1-4258-abae-2931fb4f16de"
@@ -271,17 +261,13 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user = {
-                "name": "example",
-                "id": "886b4266-77d1-4258-abae-2931fb4f16de"
-                "credentials": {
-                    "identity": "example@main.com",
-                    "secret": "12345678"
-                },
-                "metadata": {
-                    "foo": "bar"
-                }
-            }
-            >>> mf_resp = mfsdk.users.update(user)
+            ...     "name": "example",
+            ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de"
+            ...     "metadata": {
+            ...            "foo": "bar"
+            ...        }
+            ... }
+            >>> mf_resp = mfsdk.users.update(user, token)
             >>> mf_resp            
         """
         http_resp = requests.patch(
@@ -328,17 +314,17 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user = {
-                "name": "example",
-                "id": "886b4266-77d1-4258-abae-2931fb4f16de"
-                "credentials": {
-                    "identity": "example@main.com",
-                    "secret": "12345678"
-                },
-                "metadata": {
-                    "foo": "bar"
-                }
-            }
-            >>> mf_resp = mfsdk.users.update_user_idenity(user)
+            ...    "name": "example",
+            ...    "id": "886b4266-77d1-4258-abae-2931fb4f16de"
+            ...    "credentials": {
+            ...        "identity": "example@main.com",
+            ...        "secret": "12345678"
+            ...    },
+            ...    "metadata": {
+            ...        "foo": "bar"
+            ...     }
+            ... }
+            >>> mf_resp = mfsdk.users.update_user_identity(user, user_token)
             >>> mf_resp            
         """
         http_resp = requests.patch(
@@ -369,13 +355,9 @@ class Users:
                 "name": "example",
                 "id": "886b4266-77d1-4258-abae-2931fb4f16de"
                 "tags": [
-                    "yello",
-                    "orange"
+                    "back",
+                    "end"
                 ]
-                "credentials": {
-                    "identity": "example@main.com",
-                    "secret": "12345678"
-                },
                 "metadata": {
                     "foo": "bar"
                 }
@@ -390,17 +372,14 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user = {
-                "name": "example",
-                "id": "886b4266-77d1-4258-abae-2931fb4f16de"
-                "credentials": {
-                    "identity": "example@main.com",
-                    "secret": "12345678"
-                },
-                "metadata": {
-                    "foo": "bar"
-                }
-            }
-            >>> mf_resp = mfsdk.users.update(user)
+            ...     "name": "example",
+            ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de"
+            ...     "tags": [
+            ...        "back",
+            ...        "end"
+            ...     ]
+            ... }
+            >>> mf_resp = mfsdk.users.update_user_tags(user, user_token)
             >>> mf_resp            
         """
         http_resp = requests.patch(
@@ -430,17 +409,6 @@ class Users:
             {
                 "name": "example",
                 "id": "886b4266-77d1-4258-abae-2931fb4f16de"
-                "tags": [
-                    "yello",
-                    "orange"
-                ]
-                "credentials": {
-                    "identity": "example@main.com",
-                    "secret": "12345678"
-                },
-                "metadata": {
-                    "foo": "bar"
-                },
                 "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"
             }
             token: str - token used for creating a new user
@@ -453,11 +421,11 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user = {
-                "name": "example",
-                "id": "886b4266-77d1-4258-abae-2931fb4f16de",
-                "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"
-            }
-            >>> mf_resp = mfsdk.users.update(user)
+            ...     "name": "example",
+            ...     "id": "886b4266-77d1-4258-abae-2931fb4f16de",
+            ...     "owner": "c52d-3b0d-43b9-8c3e-275c087d875af"
+            ... }
+            >>> mf_resp = mfsdk.users.update_user_owner(user, user_token)
             >>> mf_resp            
         """
         http_resp = requests.patch(
@@ -493,9 +461,9 @@ class Users:
             
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
-            >>> old_secret = old_secret
-            >>> new_secret = new_secret
-            >>> mf_resp = mfsdk.users.update(user)
+            ... old_secret = 12345678
+            ... new_secret = 87654321
+            >>> mf_resp = mfsdk.users.update(old_secret, new_secret, user_token)
             >>> mf_resp            
         """
         payload = {"old_secret": old_secret, "new_secret": new_secret}
@@ -527,6 +495,15 @@ class Users:
             
         returns: 
             mf_resp: response.Response - response object
+        
+        Usage::
+            
+            >>> from mainflux import sdk
+            >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
+            ... email = admin@example.com
+            ... url = stp@gmail.com
+            >>> mf_resp = mfsdk.users.reset_password_request(email, url)
+            >>> mf_resp
         """
         http_resp = requests.post(
             self.URL + "/password/reset-request",
@@ -558,6 +535,15 @@ class Users:
             
         returns: 
             mf_resp: "OK"
+        
+        Usage::
+            
+            >>> from mainflux import sdk
+            >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
+            ... password = 234567
+            ... confirm_password = 234567
+            >>> mf_resp = mfsdk.users.reset_password(password, confirm_password, token)
+            >>> mf_resp
         """
         payload = {
             "password": password,
@@ -595,7 +581,7 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"
-            >>> mf_resp = mfsdk.users.enable(user)
+            >>> mf_resp = mfsdk.users.enable(user_id, user_token)
             >>> mf_resp            
         """
         mf_resp = response.Response()
@@ -627,7 +613,7 @@ class Users:
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
             >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"
-            >>> mf_resp = mfsdk.users.disable(user)
+            >>> mf_resp = mfsdk.users.disable(user_id, user_token)
             >>> mf_resp            
         """
         mf_resp = response.Response()
@@ -668,8 +654,13 @@ class Users:
             
             >>> from mainflux import sdk
             >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")
-            >>> user_id= "886b4266-77d1-4258-abae-2931fb4f16de"
-            >>> mf_resp = mfsdk.users.authorise_user(user)
+            >>> access_request = {
+            ...     "subject": "<user_id>",
+            ...     "object": "<group_id>",
+            ...     "action": "<action>",
+            ...     "entity_type": "<entity_type>"
+            ...     }
+            >>> mf_resp = mfsdk.users.authorise_user(access_request, token)
             >>> mf_resp            
         """
         mf_resp = response.Response()

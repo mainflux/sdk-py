@@ -12,7 +12,6 @@
 - [`messages`](./messages.md#module-messages)
 - [`response`](./response.md#module-response)
 - [`sdk`](./sdk.md#module-sdk)
-- [`things`](./things.md#module-things)
 - [`users`](./users.md#module-users)
 - [`utils`](./utils.md#module-utils)
 
@@ -26,7 +25,6 @@
 - [`response.Error`](./response.md#class-error)
 - [`response.Response`](./response.md#class-response)
 - [`sdk.SDK`](./sdk.md#class-sdk)
-- [`things.Things`](./things.md#class-things)
 - [`users.Users`](./users.md#class-users): Users API client.
 
 ## Functions
