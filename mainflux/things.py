@@ -32,7 +32,7 @@ class Things:
             None
     """
     def create(self, thing: dict, token: str):
-        """Creates thing entity in the databas
+        """Creates thing entity in the database.
                 
         Creates a new thing with provided thing information.
         If token is provided, it will be used to create a new thing
@@ -72,7 +72,7 @@ class Things:
              mf_resp.value = http_resp.json()
         return mf_resp
 
-    def create_bulk(self, things: list, token: str)
+    def create_bulk(self, things: list, token: str):
         """Creates multiple things in bulk.
                 
         Creates multiple new things with provided things information.
@@ -118,7 +118,7 @@ class Things:
         return mf_resp
 
     def get(self, thing_id: str, token: str):
-        """Gets a thing entity for a logged-in user
+        """Gets a thing entity.
         
         Provides information about a thing with provided thing ID and token.
         Information about a thing is provided in a JSON format and includes the name
@@ -244,7 +244,7 @@ class Things:
         return mf_resp
 
     def update(self, thing_id: str, thing: dict, token: str):
-        """Updates thing entity
+        """Updates thing entity.
         
         Allows a logged in user to make changes and update a thing's
         information with provided thing ID and valid token. Information 
@@ -288,7 +288,7 @@ class Things:
         return mf_resp
     
     def update_thing_secret(self, thing_id: str, thing: dict, token: str):
-        """Updates thing secret
+        """Updates thing secret.
         
         Allows a logged in user to make changes and update a thing's
         information with provided thing ID and valid token. The thing's 
@@ -332,7 +332,7 @@ class Things:
         return mf_resp
     
     def update_thing_tags(self, thing_id: str, thing: dict, token: str):
-        """Updates thing tags
+        """Updates thing tags.
         
         Allows a logged in user to make changes and update a thing's
         information with provided thing ID and valid token. The thing's
@@ -376,7 +376,7 @@ class Things:
         return mf_resp
     
     def update_thing_owner(self, thing_id: str, thing: dict, token: str):
-        """Updates thing owner
+        """Updates thing owner.
         
         Allows a logged in user to make changes and update a thing's
             information with provided thing ID and valid token. The thing
@@ -420,7 +420,7 @@ class Things:
         return mf_resp
 
     def disable(self, thing_id: str, token: str):
-        """Deletes a thing entity from database.
+        """Deletes a thing entity from the database.
         
         Deletes a thing with provided thing ID and valid token.
         
@@ -452,7 +452,7 @@ class Things:
         return mf_resp
 
     def connects(self, thing_ids: list, channel_ids: list, actions: list, token: str):
-        """Connects thing and channel. 
+        """Connects things and channels. 
         
         Connects multiple things and channels with provided thing IDs 
         as the subjects, channel IDs as the objects, actions that the 
@@ -495,7 +495,7 @@ class Things:
         return mf_resp
 
     def disconnects(self, thing_ids: list, channel_ids: list, token: str):
-        """Disconnect thing and channel
+        """Disconnect things and channels.
         
         Disconnects multiple things and channels with provided thing IDs 
         as the subjects, channel IDs as the objects and a valid token.
@@ -532,7 +532,7 @@ class Things:
         return mf_resp
 
     def connect(self, thing_id: str, channel_id: str, action: str, token: str):
-        """Connects thing and channel
+        """Connects thing and channel.
         
         Connects a thing and channel with provided thing ID as the subject,
         channel ID as the object, action that the thing can partake in and a
@@ -574,7 +574,7 @@ class Things:
         return mf_resp
 
     def disconnect(self, thing_id: str, channel_id: str, token: str):
-        """Disconnect thing and channel
+        """Disconnects thing and channel.
         
         Disconnects a thing and channel with provided thing ID as the subject,  
         channel ID as the object and a valid token.
@@ -611,7 +611,7 @@ class Things:
         return mf_resp
     
     def share_thing(self, user_id: str, channel_id: str, actions: list, token: str):
-        """Share thing
+        """Shares thing.
         
         Allows a logged in user to create new policies for a thing over a channel
         provided with a user ID, channel ID, actions that the thing can partake in
@@ -654,7 +654,7 @@ class Things:
         return mf_resp
     
     def authorise_thing(self,access_request: dict, token: str):
-        """Authorises thing
+        """Authorises thing.
         
         Creates policies for a thing as a subject over a channel which is the object. 
         It authorizes the thing to perform some actions over the channel.
