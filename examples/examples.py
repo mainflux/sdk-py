@@ -8,8 +8,7 @@ mfsdk = sdk.SDK(
     reader_url=default_url + ":9204",
     http_adapter_url=default_url,
     certs_url=default_url + ":9019",
-    bootstrap_url=default_url + ":9013",
-    auth_url=default_url,
+    bootstrap_url=default_url + ":9013"
 )
 
 """To start working with the Mainflux system,
