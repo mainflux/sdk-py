@@ -1,4 +1,5 @@
 import requests
+import json
 
 from mainflux import response
 from mainflux import errors
@@ -222,7 +223,6 @@ class Users:
             headers=utils.construct_header(user_token, utils.CTJSON),
             params=query_params,
         )
-        print(http_resp.url)
         mf_resp = response.Response()
         if http_resp.status_code != 200:
             mf_resp.error.status = 1
@@ -273,7 +273,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"],
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=user,
+            data=json.dumps(user),
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -330,7 +330,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/identity",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=user,
+            data= json.dumps(user),
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -385,7 +385,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/tags",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=user,
+            data=json.dumps(user),
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:
@@ -431,7 +431,7 @@ class Users:
         http_resp = requests.patch(
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user["id"] + "/owner",
             headers=utils.construct_header(user_token, utils.CTJSON),
-            data=user,
+            data=json.dumps(user),
         )
         mf_resp = response.Response()
         if http_resp.status_code != 200:

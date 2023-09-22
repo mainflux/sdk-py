@@ -21,7 +21,7 @@
 - [`boostrap.Bootstrap`](./boostrap.md#class-bootstrap)
 - [`certs.Certs`](./certs.md#class-certs)
 - [`channels.Channels`](./channels.md#class-channels)
-- [`groups.Groups`](./groups.md#class-groups)
+- [`groups.Groups`](./groups.md#class-groups): Groups class provides the abstraction of the Mainflux groups service API.
 - [`messages.Messages`](./messages.md#class-messages)
 - [`response.Error`](./response.md#class-error)
 - [`response.Response`](./response.md#class-response)

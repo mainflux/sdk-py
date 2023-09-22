@@ -129,7 +129,7 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-   
+  
 """Disables user"""
 mf_resp = mfsdk.users.disable(user_id="<user_id>", user_token="<token>")
 if mf_resp.error.status == 0:

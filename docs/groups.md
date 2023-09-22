@@ -14,11 +14,18 @@
 <a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L8"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ## <kbd>class</kbd> `Groups`
+Groups class provides the abstraction of the Mainflux groups service API. 
+
+Groups class provides the following functionality: create, get, get_all, parents,  children, update, members, memberships, assign, unassign, disable. 
 
 
 
+**Attributes:**
+ 
+ - <b>`URL`</b>:  Mainflux groups service URL. 
+ - <b>`GROUPS_ENDPOINT`</b>:  Mainflux groups service API endpoint.    
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L11"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L21"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `__init__`
 
@@ -35,7 +42,7 @@ __init__(url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L150"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L387"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `assign`
 
@@ -45,9 +52,24 @@ assign(group_id: str, member_id: str, member_type: list, token: str)
 
 Assign 
 
+Assigns a member to a group when provided with group_id, member_id,  member_type which is their action and a token. 
+
+params:  group_id: str - group id  member_id: str - member id  member_type: list - actions the member can perform for example:  [  "m_read", "m_write", "m_admin"   ]    token: str - token used to assign a member to a group. 
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group_id = "group_id"     >>> member_id = "member_id"     >>> member_type = [     ...     "m_read", "m_write", "m_admin"     ... ]     >>> mf_resp = mfsdk.groups.assign(group_id, member_id, member_type)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L82"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L202"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `children`
 
@@ -57,9 +79,24 @@ children(group_id: str, query_params: dict, token: str)
 
 Gets children for a specific group from database 
 
+Provides information about children for a specific group from database when provided with group_id, query_params and token. 
+
+params:  group_id: str - group id of the parent group in question.  query_params: dict - query parameters for example:  {  "offset": 0,  "limit": 10,  }  where offset is the number of items to skip before starting to collect   the result set and limit is the numbers of items to return.  token: str - token used to get children for a specific group.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group_id = "group_id"     >>> query_params = {     ...     "offset": 0,     ...     "limit": 10,     ... }     >>> mf_resp = mfsdk.groups.children(group_id, query_params)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L14"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L34"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `create`
 
@@ -67,11 +104,26 @@ Gets children for a specific group from database
 create(group: dict, token: str)
 ```
 
-Creates group entity in the database 
+Creates a group entity in the database. 
+
+Creates a group entity in the database using the provided group object and token. 
+
+params:  group: dict - group information for example:  {  "name": "groupName",  }  token: str - token used to create a new group.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group = {     ...     "name": "groupName",     ... }     >>> mf_resp = mfsdk.groups.create(group)     >>> mf_resp 
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L182"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L468"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `disable`
 
@@ -81,9 +133,22 @@ disable(group_id: str, user_token: str)
 
 Disables a group entity from database 
 
+Deletes a group from the database when provided with group_id and  user_token. 
+
+params:  group_id: str - group id  user_token: str - token used to delete a group.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+```               >>> from mainflux import sdk          >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")          >>> group_id = "group_id"          >>> mf_resp = mfsdk.groups.disable(group_id)          >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L31"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L75"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get`
 
@@ -93,9 +158,24 @@ get(group_id: str, token: str)
 
 Gets a group entity 
 
+Provides information about a group entity using the provided group_id and a token. 
+
+params:   group_id: str - group id  token: str - token used to get a group.   
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group_id = "group_id"     >>> mf_resp = mfsdk.groups.get(group_id)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L47"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L110"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `get_all`
 
@@ -105,9 +185,24 @@ get_all(query_params: dict, token: str)
 
 Gets all groups from database 
 
+Gets all groups from database using the provided query_params and token. 
+
+params:  query_params: dict - query parameters for example:  {  "offset": 0,  "limit": 10,  }  where offset is the number of items to skip before starting to collect   the result set and limit is the numbers of items to return.  token: str - token used to get all groups.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> query_params = {     ...     "offset": 0,     ...     "limit": 10,     ... }     >>> mf_resp = mfsdk.groups.get_all(query_params)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L116"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L293"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `members`
 
@@ -117,9 +212,24 @@ members(group_id: str, query_params: dict, token: str)
 
 Gets members associated with the group specified by id 
 
+Provides information about members associated with the group specified by id when provided with group_id, query_params and token. 
+
+params:   group_id: str - group id  query_params: dict - query parameters for example:  {  "offset": 0,  "limit": 10,  }  where offset is the number of items to skip before starting to collect   the result set and limit is the numbers of items to return.  token: str - token used to get members associated with the group specified by id.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group_id = "group_id"     >>> query_params = {     ...     "offset": 0,     ...     "limit": 10,     ... }     >>> mf_resp = mfsdk.groups.members(group_id, query_params)     >>> mf_resp        
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L133"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L340"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `memberships`
 
@@ -127,11 +237,24 @@ Gets members associated with the group specified by id
 memberships(member_id: str, query_params: dict, token: str)
 ```
 
-Get list of members ID's from group 
+Retrieves a list of groups the user is connected to 
+
+Retrieves a list of groups the user is connected to when provided with the users id, query_params and token.  
+
+params:   member_id: str - user id  query_params: dict - query parameters for example:  {  "offset": 0,  "limit": 10,  }  where offset is the number of items to skip before starting to collect  the result set and limit is the numbers of items to return.  token: str - token used to retrieve a list of groups the user is connected to. 
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+```               >>> from mainflux import sdk          >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")          >>> member_id = "member_id"          >>> query_params = {          ...     "offset": 0,          ...     "limit": 10,          ... }          >>> mf_resp = mfsdk.groups.memberships(member_id, query_params)          >>> mf_resp     
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L64"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L154"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `parents`
 
@@ -141,9 +264,24 @@ parents(group_id: str, query_params: dict, token: str)
 
 Gets parents for a specific group from database 
 
+Provides information about parents for a specific group from database when provided with group_id, query_params and token. 
+
+params:   group_id: str - group id of the child group in question.  query_params: dict - query parameters for example:  {  "offset": 0,  "limit": 10,  }  where offset is the number of items to skip before starting to collect   the result set and limit is the numbers of items to return.  token: str - token used to get parents for a specific group.  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+``` 
+
+    >>> from mainflux import sdk     >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")     >>> group_id = "group_id"     >>> query_params = {     ...     "offset": 0,     ...     "limit": 10,     ... }     >>> mf_resp = mfsdk.groups.parents(group_id, query_params)     >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L166"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L431"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `unassign`
 
@@ -153,9 +291,22 @@ unassign(group_id: str, token: str, members_ids)
 
 Unassign 
 
+Deletes a user's policy from over a group when provided with group_id, token and members_ids. 
+
+params:  group_id: str - group id  token: str - token used to delete a user's policy from over a group.  members_ids: str - member id  
+
+
+
+**returns:**
+ 
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+```                        >>> from mainflux import sdk              >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")              >>> group_id = "group_id"              >>> members_ids = "members_ids"              >>> mf_resp = mfsdk.groups.unassign(group_id, members_ids)              >>> mf_resp 
+
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L99"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/groups.py#L249"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
@@ -164,6 +315,21 @@ update(group_id: str, group: dict, token: str)
 ```
 
 Updates group entity 
+
+Updates a group entity in the database using the provided group_id,  group object and token. It updates the group name and metadata. 
+
+params:  group_id: str - group id  group: dict - group information for example:  {  "name": "groupName",  }  token: str - token used to update a group.  
+
+
+
+**returns:**
+ 
+
+
+ - <b>`mf_resp`</b>:  response.Response - response object 
+
+Usage:
+```               >>> from mainflux import sdk          >>> mfsdk = sdk.SDK(users_url="http://localhost:9002")          >>> group_id = "group_id"          >>> group = {          ...     "name": "groupName",          ... }          >>> mf_resp = mfsdk.groups.update(group_id, group)          >>> mf_resp 
 
 
 
