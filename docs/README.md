@@ -18,9 +18,9 @@
 
 ## Classes
 
-- [`boostrap.Bootstrap`](./boostrap.md#class-bootstrap)
-- [`certs.Certs`](./certs.md#class-certs)
-- [`channels.Channels`](./channels.md#class-channels)
+- [`boostrap.Bootstrap`](./boostrap.md#class-bootstrap): Bootstrap service API client.
+- [`certs.Certs`](./certs.md#class-certs): Mainflux Certificates API
+- [`channels.Channels`](./channels.md#class-channels): Channels class provides the abstraction of the Mainflux Channels API.
 - [`groups.Groups`](./groups.md#class-groups): Groups class provides the abstraction of the Mainflux groups service API.
 - [`messages.Messages`](./messages.md#class-messages)
 - [`response.Error`](./response.md#class-error)

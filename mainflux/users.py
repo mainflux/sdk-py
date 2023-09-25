@@ -485,13 +485,15 @@ class Users:
     def reset_password_request(self, email: str, url: str):
         """User Password reset request. 
         
-        Generates a reset token and sends and email 
+        Generates a reset token and sends an email to the user
         with link for resetting password.
         
         params:
             referrer email: str - this is the host being sent by the browser.
-                                the email is part of the header.
-            url: str.
+                            The email must be valid preferably gmail and ensure that the email is 
+                            already linked to a user as their identity in the database.
+                            The email is part of the header.
+            url: str - http://localhost/reset-request
             
         returns: 
             mf_resp: response.Response - response object

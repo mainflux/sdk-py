@@ -105,9 +105,9 @@ if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-    
+
 """User Password reset request"""
-mf_resp = mfsdk.users.reset_password_request(email= "<email>", url= "<url>")
+mf_resp = mfsdk.users.reset_password_request(email= "<valid email>", url= "http://localhost/reset-request")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
