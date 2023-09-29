@@ -68,7 +68,7 @@ add(config: dict, token: str)
 
 Adds new config to the list of config owned by user identified using the provided access token. 
 
-Some of the key data needed include the external_key and external_id which must be specific to the thing provided with the thing_id. 
+Some of the key data needed include the external_key and external_id which must be specific to the thing provided with the thing_id. Mind that every configuration  must have a specific thing_id. 
 
 params:  config (dict): Configuration data for example:   {    "external_id": "123",  "external_key": "456",  "thing_id": "fdb1057c-2905-4f71-9a80-e0ce9191e667",  "name": "thing_name"  }  token (str): Authorization token.  
 
@@ -99,7 +99,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L299"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L300"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `bootstrap`
 
@@ -130,7 +130,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L265"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L266"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `remove`
 
@@ -160,7 +160,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L172"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L173"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update`
 
@@ -201,7 +201,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L223"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L224"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `update_certs`
 
@@ -240,7 +240,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L138"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L139"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `view`
 
@@ -272,7 +272,7 @@ Usage:
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L89"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/boostrap.py#L90"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `whitelist`
 

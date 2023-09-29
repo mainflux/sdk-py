@@ -1,11 +1,12 @@
 from mainflux import sdk
+import json
 
 default_url = "http://localhost"
 
 mfsdk = sdk.SDK(
     users_url=default_url,
     things_url=default_url + ":9000",
-    reader_url=default_url + ":9204",
+    reader_url=default_url + ":9011",
     http_adapter_url=default_url,
     certs_url=default_url + ":9019",
     bootstrap_url=default_url + ":9013"
@@ -516,7 +517,7 @@ else:
 
 """Sends message via HTTP protocol"""
 mf_resp = mfsdk.messages.send(
-    channel_id="<channel_id>", msg="<[message]>", thing_key="<thing_secret>"
+    channel_id="<channel_id>", msg='<[message]>', thing_key="<thing_secret>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -531,7 +532,7 @@ else:
     print(mf_resp.error.message)
 
 """Issue certs"""
-mf_resp = mfsdk.certs.issue(thing_id="<thing_id>",valid="10h", token="<token>")
+mf_resp = mfsdk.certs.issue(thing_id="<thing_id>",valid="<time_limit>", token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:

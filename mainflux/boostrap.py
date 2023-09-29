@@ -43,7 +43,8 @@ class Bootstrap:
         using the provided access token.
         
         Some of the key data needed include the external_key and external_id which must be
-        specific to the thing provided with the thing_id.
+        specific to the thing provided with the thing_id. Mind that every configuration 
+        must have a specific thing_id.
         
         params:
             config (dict): Configuration data for example: 

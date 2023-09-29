@@ -22,7 +22,7 @@
 - [`certs.Certs`](./certs.md#class-certs): Mainflux Certificates API
 - [`channels.Channels`](./channels.md#class-channels): Channels class provides the abstraction of the Mainflux Channels API.
 - [`groups.Groups`](./groups.md#class-groups): Groups class provides the abstraction of the Mainflux groups service API.
-- [`messages.Messages`](./messages.md#class-messages)
+- [`messages.Messages`](./messages.md#class-messages): Messages API client
 - [`response.Error`](./response.md#class-error)
 - [`response.Response`](./response.md#class-response)
 - [`sdk.SDK`](./sdk.md#class-sdk)
