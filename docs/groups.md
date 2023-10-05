@@ -60,7 +60,7 @@ params:  group_id: str - group id  member_id: str - member id  member_type: list
 
 **returns:**
  
- - <b>`mf_resp`</b>:  response.Response - response object 
+ - <b>`mf_resp`</b>:  "Policy created" 
 
 Usage:
 ``` 
