@@ -135,7 +135,7 @@ class Channels:
             json=channels,
             headers=utils.construct_header(token, utils.CTJSON),
         )
-        if http_resp.status_code != 201:
+        if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.channels["create_bulk"], http_resp.status_code
@@ -307,6 +307,8 @@ class Channels:
             mf_resp.error.message = errors.handle_error(
                 errors.channels["update"], http_resp.status_code
             )
+        else:
+            mf_resp.value = http_resp.json()
         return mf_resp
 
     def disable(self, channel_id: str, token: str):

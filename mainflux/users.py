@@ -591,7 +591,7 @@ class Users:
             self.URL + "/" + self.USERS_ENDPOINT + "/" + user_id + "/enable",
             headers=utils.construct_header(user_token, utils.CTJSON),
         )
-        if http_resp.status_code != 204:
+        if http_resp.status_code != 200:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.users["enable"], http_resp.status_code

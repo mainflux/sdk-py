@@ -1,4 +1,5 @@
 import requests
+import json
 
 from mainflux import response
 from mainflux import errors
@@ -277,7 +278,7 @@ class Groups:
         """
         http_resp = requests.put(
             self.URL + "/" + self.GROUPS_ENDPOINT + "/" + group_id,
-            data=group,
+            data=json.dumps(group),
             headers=utils.construct_header(token, utils.CTJSON),
         )
         mf_resp = response.Response()
@@ -400,7 +401,7 @@ class Groups:
             token: str - token used to assign a member to a group.
         
         returns:
-            mf_resp: response.Response - response object
+            mf_resp: "Policy created"
             
         Usage::
         
@@ -421,11 +422,13 @@ class Groups:
             headers=utils.construct_header(token, utils.CTJSON),
             json=payload,
         )
-        if http_resp.status_code != 200:
+        if http_resp.status_code != 201:
             mf_resp.error.status = 1
             mf_resp.error.message = errors.handle_error(
                 errors.groups["assign"], http_resp.status_code
             )
+        else:
+            mf_resp.value = "Policy created"
         return mf_resp
 
     def unassign(self, group_id: str, token: str, members_ids):

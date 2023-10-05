@@ -42,7 +42,7 @@ __init__(adapter_url: str, reader_url: str)
 
 ---
 
-<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/messages.py#L80"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
+<a href="https://github.com/mainflux/sdk-py/blob/main/mainflux/messages.py#L82"><img align="right" style="float:right;" src="https://img.shields.io/badge/-source-cccccc?style=flat-square"></a>
 
 ### <kbd>method</kbd> `read`
 
@@ -86,7 +86,7 @@ Sends message via HTTP protocol
 
 Sends message to a given channel via HTTP protocol. Message is sent through a writer add-on such as timescale. Message is sent to a http port specific to the writer add-on. The thing and channel must be created before sending the message and connected.  
 
-params:  channel_id: ID of the channel to send message to  msg: message to send to the channel that should be in bytes  thing_key: secret of the thing sending the message 
+params:  channel_id: ID of the channel to send message to  msg: message to send to the channel that should be in encoded into  bytes format for example:   [{"bn":"demo", "bu":"V", "n":"voltage", "u":"V", "v":5}]  thing_key: secret of the thing sending the message 
 
 
 

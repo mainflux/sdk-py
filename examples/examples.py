@@ -284,7 +284,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="<channel_id>", thing_id="<thing_id>", action="m_read", token="<token>"
+    channel_id="<channel_id>", thing_id="<thing_id>", action="<action>", token="<token>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -338,7 +338,7 @@ else:
 
 """To create a channel, you need a channel and a token"""
 mf_resp = mfsdk.channels.create(
-    channel={"name": "<groupname>"}, token="<token>")
+    channel={"name": "<channel_name>"}, token="<token>")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -425,8 +425,11 @@ else:
 """Group update"""
 group={
     "id": "<group_id>",
-    "name": "<group_name>"
-}
+    "name": "<group_name>",
+    "metdata": {
+        "foo": "bar"
+    }
+ }
 mf_resp = mfsdk.groups.update(
     token="<token>", group= group, group_id="group_id"
 )

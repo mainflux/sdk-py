@@ -217,7 +217,7 @@ def test_reset_password_bad_token(requests_mock):
     assert r.error.message == "Failed due to malformed JSON."
 
 def test_enable_user(requests_mock):
-    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/enable", json=user, status_code=204)
+    requests_mock.register_uri("POST", url + "/users/" + user["id"] + "/enable", json=user, status_code=200)
     r = s.users.enable(user_id=user["id"], user_token= token["access_token"])
     assert r.error.status == 0
     assert user == r.value 

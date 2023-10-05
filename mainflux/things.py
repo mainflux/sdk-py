@@ -608,6 +608,8 @@ class Things:
             mf_resp.error.message = errors.handle_error(
                 errors.things["disconnect"], http_resp.status_code
             )
+        else:
+            mf_resp.value = "Disconnected"
         return mf_resp
     
     def share_thing(self, user_id: str, channel_id: str, actions: list, token: str):

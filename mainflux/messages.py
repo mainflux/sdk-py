@@ -40,7 +40,9 @@ class Messages:
         
         params:
             channel_id: ID of the channel to send message to
-            msg: message to send to the channel that should be in bytes
+            msg: message to send to the channel that should be in encoded into
+                bytes format for example: 
+                [{"bn":"demo", "bu":"V", "n":"voltage", "u":"V", "v":5}]
             thing_key: secret of the thing sending the message
         
         returns:

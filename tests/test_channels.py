@@ -42,7 +42,7 @@ def test_create_channel_entity_exist(requests_mock):
     assert r.error.message == "Failed due to using an existing identity."
 
 def test_create_bulk_channels(requests_mock):
-    requests_mock.register_uri("POST", url + "/channels/bulk", json=[channel_id, channel_id1], headers={"location": "/channels/channel_ids"}, status_code=201)
+    requests_mock.register_uri("POST", url + "/channels/bulk", json=[channel_id, channel_id1], headers={"location": "/channels/channel_ids"}, status_code=200)
     r = s.channels.create_bulk(channel_id, token=token)
     assert r.error.status == 0
     assert [channel_id, channel_id1] == r.value
