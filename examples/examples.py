@@ -15,16 +15,20 @@ mfsdk = sdk.SDK(
 """Repetitive values that can be easily fed into the example code"""
 
 user_id =  "<user_id>",
-token =  "<user_token>",
+token =  "<access_token>",
 thing_id = "<thing_id>",
 channel_id = "<channel_id>",
 group_id = "<group_id>",
 thing_id2 = "<thing_id2>",
+email = "<email>",
+password = "<password>",
+refresh_token = "<refresh_token>",
+channel_id2 = "<channel_id2>",
 
 """To start working with the Mainflux system,
 you need to create a user account"""
 mf_resp = mfsdk.users.create(
-    user={"credentials": {"identity": "<user_identity>", "secret": "<user_secret>"}},
+    user={"credentials": {"identity": "<user_identity>", "secret": password}},
     token= token,
 )
 if mf_resp.error.status == 0:
@@ -34,7 +38,7 @@ else:
 
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "<user_identity>", "secret": "<user_secret>"}
+    user={ "identity" : "<user_identity>", "secret": password}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -44,7 +48,7 @@ else:
 """Refreshes Access and Refresh Token used for authenticating into the system."""
 
 mf_resp = mfsdk.users.refresh_token(
-    refresh_token="<refresh_token>"
+    refresh_token= refresh_token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -105,7 +109,7 @@ else:
 user = {
   "credentials": {
     "identity": "<user_identity>",
-    "secret": "<secret>"
+    "secret": password,
   },
   "id":  user_id,
   "owner": "<owner_id>"
@@ -117,7 +121,7 @@ else:
     print(mf_resp.error.message)
 
 """User Password reset request"""
-mf_resp = mfsdk.users.reset_password_request(email= "<valid email>", url= "http://localhost/reset-request")
+mf_resp = mfsdk.users.reset_password_request(email= email, url= "http://localhost/reset-request")
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -236,7 +240,7 @@ else:
 
 """Updates a thing secret in a database"""
 mf_resp = mfsdk.things.update_thing_secret(
-    thing_id=thing_id, token= token, thing={"secret": "<thing_secret>"}
+    thing_id=thing_id, token= token, thing={"secret": password}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -277,7 +281,7 @@ else:
 mf_resp = mfsdk.things.get_by_channel(
     channel_id=channel_id,
     query_params={"offset": 1, "limit": 5},
-    token="<user_token>",
+    token=token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -312,7 +316,7 @@ else:
 """Connect things to channels"""
 mf_resp = mfsdk.things.connects(
     thing_ids=[thing_id, thing_id2],
-    channel_ids=["<channel_ids>"],
+    channel_ids=[channel_id, channel_id2],
     actions="<action>",
     token= token,
 )
@@ -325,8 +329,8 @@ else:
 """Disconnect things from channels"""
 mf_resp = mfsdk.things.disconnects(
     thing_ids=[thing_id, thing_id2],
-    channel_ids=["<channel_id1>", "<channel_id2>"],
-    token="<user_token>",
+    channel_ids=[channel_id, channel_id2],
+    token=token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -338,7 +342,7 @@ mf_resp = mfsdk.things.share_thing(
     channel_id= channel_id, 
     user_id=  user_id, 
     actions= ["<actions>"], 
-    token= "<admin_token>"
+    token= token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
