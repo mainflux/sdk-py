@@ -12,11 +12,20 @@ mfsdk = sdk.SDK(
     bootstrap_url=default_url + ":9013"
 )
 
+"""Repetitive values that can be easily fed into the example code"""
+
+user_id =  "<user_id>",
+token =  "<user_token>",
+thing_id = "<thing_id>",
+channel_id = "<channel_id>",
+group_id = "<group_id>",
+thing_id2 = "<thing_id2>",
+
 """To start working with the Mainflux system,
 you need to create a user account"""
 mf_resp = mfsdk.users.create(
     user={"credentials": {"identity": "<user_identity>", "secret": "<user_secret>"}},
-    token="",
+    token= token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -25,7 +34,7 @@ else:
 
 """To log in to the Mainflux system, you need to create a user token"""
 mf_resp = mfsdk.users.login(
-    user={ "identity" : "admin@example.com", "secret": "<secret>"}
+    user={ "identity" : "<user_identity>", "secret": "<user_secret>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -44,7 +53,7 @@ else:
 
 """You can always check the user entity that is logged in
 by entering the user ID and token"""
-mf_resp = mfsdk.users.get(user_id="<user_id>", token="<token>")
+mf_resp = mfsdk.users.get(user_id= user_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -52,13 +61,13 @@ else:
 
 """Updates user entities in the database"""
 user = {
-    "id": "<user_id>",
+    "id":  user_id,
     "name": "<user_name>",
     "metadata": {
         "foo": "bar"
     }
 }
-mf_resp = mfsdk.users.update(user_token="<token>", user=user)
+mf_resp = mfsdk.users.update(user_token= token, user=user)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -69,9 +78,9 @@ user = {
   "credentials": {
     "identity": "<new_user_identity>",
   },
-  "id": "<user_id>"
+  "id":  user_id
 }
-mf_resp = mfsdk.users.update_user_identity(user_token="<token>", user=user)
+mf_resp = mfsdk.users.update_user_identity(user_token= token, user=user)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -79,14 +88,14 @@ else:
 
 """Updates user tags in the database"""
 user = {
-  "id": "<user_id>",
+  "id":  user_id,
   "name": "<user_name>",
   "tags": [
     "yellow",
     "orange"
   ]
 }
-mf_resp = mfsdk.users.update_user_tags(user_token="<token>", user=user)
+mf_resp = mfsdk.users.update_user_tags(user_token= token, user=user)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -98,10 +107,10 @@ user = {
     "identity": "<user_identity>",
     "secret": "<secret>"
   },
-  "id": "<user_id>",
+  "id":  user_id,
   "owner": "<owner_id>"
 }
-mf_resp = mfsdk.users.update_user_owner(user_token="<token>", user=user)
+mf_resp = mfsdk.users.update_user_owner(user_token= token, user=user)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -115,7 +124,7 @@ else:
     print(mf_resp.error.message)
 
 """User Password reset with the reset_request token"""
-mf_resp = mfsdk.users.reset_password(password="<password>", confirm_password="<confirm_password>", token= "<token>")
+mf_resp = mfsdk.users.reset_password(password="<password>", confirm_password="<confirm_password>", token=  token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -124,7 +133,7 @@ else:
 """You can get all users in the database by calling the get_all () function"""
 mf_resp = mfsdk.users.get_all(
     query_params={"offset": 0, "limit": 5},
-    user_token="<token>"
+    user_token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -132,14 +141,14 @@ else:
     print(mf_resp.error.message)
   
 """Disables user"""
-mf_resp = mfsdk.users.disable(user_id="<user_id>", user_token="<token>")
+mf_resp = mfsdk.users.disable(user_id= user_id, user_token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
     
 """Enables user"""
-mf_resp = mfsdk.users.enable(user_id="<user_id>", user_token="<token>")
+mf_resp = mfsdk.users.enable(user_id= user_id, user_token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -148,7 +157,7 @@ else:
 """Changing the user password can be done by calling the update password function"""
 mf_resp = mfsdk.users.update_password(
     old_secret="<old_secret>", new_secret="<new_secret>",
-    user_token="<user_token>"
+    user_token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -157,12 +166,12 @@ else:
 
 """Authorising a User"""
 access_request = {
-    "subject": "<user_id>",
-    "object": "<group_id>",
+    "subject":  user_id,
+    "object": group_id,
     "action": "<action>",
     "entity_type": "<entity_type>"
 }
-mf_resp = mfsdk.users.authorise_user(access_request=access_request, token="<token>")
+mf_resp = mfsdk.users.authorise_user(access_request=access_request, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -170,12 +179,12 @@ else:
 
 """Authorising a Thing"""
 access_request = {
-    "subject": "<thing_id>",
-    "object": "<channel_id>",
+    "subject": thing_id,
+    "object": channel_id,
     "action": "<action>",
     "entity_type": "<entity_type>"
 }
-mf_resp = mfsdk.things.authorise_thing(access_request=access_request, token="<token>")
+mf_resp = mfsdk.things.authorise_thing(access_request=access_request, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -183,7 +192,7 @@ else:
 
 """To create a thing, you need the thing name and a user token"""
 mf_resp = mfsdk.things.create(
-    thing={"name": "<thing_name>"}, token="<token>")
+    thing={"name": "<thing_name>"}, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -193,7 +202,7 @@ else:
 by entering a series of things structures and a user token"""
 mf_resp = mfsdk.things.create_bulk(
     things=[{"name": "<thing_name>"}, {"name": "<thing_name>"}, {"name": "<thing_name>"}],
-    token="<token>",
+    token= token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -201,7 +210,7 @@ else:
     print(mf_resp.error.message)
 
 """You can get thing information by entering the thing ID and user token"""
-mf_resp = mfsdk.things.get(thing_id= "<thing_id>", token="<token>")
+mf_resp = mfsdk.things.get(thing_id= thing_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -209,7 +218,7 @@ else:
 
 """You can get all things in the database by calling the get_all () function"""
 mf_resp = mfsdk.things.get_all(
-    query_params={"offset": 0, "limit": 5}, token="<token>"
+    query_params={"offset": 0, "limit": 5}, token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -218,7 +227,7 @@ else:
 
 """Updates a thing entity in a database"""
 mf_resp = mfsdk.things.update(
-    thing_id="<thing_id>", token="<token>", thing={"name": "<thing_name>"}
+    thing_id=thing_id, token= token, thing={"name": "<thing_name>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -227,7 +236,7 @@ else:
 
 """Updates a thing secret in a database"""
 mf_resp = mfsdk.things.update_thing_secret(
-    thing_id="<thing_id>", token="<token>", thing={"secret": "<thing_secret>"}
+    thing_id=thing_id, token= token, thing={"secret": "<thing_secret>"}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -236,14 +245,14 @@ else:
 
 """Updates a thing's tags in a database"""
 thing=  {
-    "id": "<thing_id>",
+    "id": thing_id,
     "name": "<thing_name>",
     "tags": [
     "dev","back"
     ]
   }
 mf_resp = mfsdk.things.update_thing_tags(
-    thing_id="<thing_id>", token="<token>", thing=thing
+    thing_id=thing_id, token= token, thing=thing
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -252,12 +261,12 @@ else:
 
 """Updates a thing's owner"""
 thing=  {
-    "id": "<thing_id>",
+    "id": thing_id,
     "name": "<thing_name>",
     "owner": "<owner_id>",
 }
 mf_resp = mfsdk.things.update_thing_owner(
-    thing_id="<thing_id>", token="<token>", thing=thing
+    thing_id=thing_id, token= token, thing=thing
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -266,7 +275,7 @@ else:
 
 """You can get all thing connected to channel"""
 mf_resp = mfsdk.things.get_by_channel(
-    channel_id="<channel_id>",
+    channel_id=channel_id,
     query_params={"offset": 1, "limit": 5},
     token="<user_token>",
 )
@@ -276,7 +285,7 @@ else:
     print(mf_resp.error.message)
 
 """To disable a thing you need a thing ID and a user token"""
-mf_resp = mfsdk.things.disable(thing_id="<thing_id>", token="<token>")
+mf_resp = mfsdk.things.disable(thing_id=thing_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -284,7 +293,7 @@ else:
 
 """Connect thing to channel"""
 mf_resp = mfsdk.things.connect(
-    channel_id="<channel_id>", thing_id="<thing_id>", action="<action>", token="<token>"
+    channel_id=channel_id, thing_id=thing_id, action="<action>", token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -293,7 +302,7 @@ else:
 
 """Disconnect thing from channel"""
 mf_resp = mfsdk.things.disconnect(
-    channel_id="<channel_id>", thing_id="<thing_id>", token="<token>"
+    channel_id=channel_id, thing_id=thing_id, token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -302,10 +311,10 @@ else:
 
 """Connect things to channels"""
 mf_resp = mfsdk.things.connects(
-    thing_ids=["<thing_id>", "<thing_id>"],
+    thing_ids=[thing_id, thing_id2],
     channel_ids=["<channel_ids>"],
     actions="<action>",
-    token="<token>",
+    token= token,
 )
 
 if mf_resp.error.status == 0:
@@ -315,7 +324,7 @@ else:
 
 """Disconnect things from channels"""
 mf_resp = mfsdk.things.disconnects(
-    thing_ids=["<thing_id1>", "<thing_id2>"],
+    thing_ids=[thing_id, thing_id2],
     channel_ids=["<channel_id1>", "<channel_id2>"],
     token="<user_token>",
 )
@@ -326,8 +335,8 @@ else:
 
 """Share thing"""
 mf_resp = mfsdk.things.share_thing(
-    channel_id= "<channel_id>", 
-    user_id= "<user_id>", 
+    channel_id= channel_id, 
+    user_id=  user_id, 
     actions= ["<actions>"], 
     token= "<admin_token>"
 )
@@ -338,7 +347,7 @@ else:
 
 """To create a channel, you need a channel and a token"""
 mf_resp = mfsdk.channels.create(
-    channel={"name": "<channel_name>"}, token="<token>")
+    channel={"name": "<channel_name>"}, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -347,7 +356,7 @@ else:
 """As with things, you can create multiple channels at once"""
 mf_resp = mfsdk.channels.create_bulk(
     channels=[{"name": "<channel_name>"}, {"name": "<channel_name>"}],
-    token="<token>",
+    token= token,
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -356,8 +365,8 @@ else:
     
 """Update channel entities in the database"""
 mf_resp = mfsdk.channels.update(
-    channel_id="<channel_id>",
-    token="<token>",
+    channel_id=channel_id,
+    token= token,
     channel={"name": "<channel_name>"},
 )
 if mf_resp.error.status == 0:
@@ -366,7 +375,7 @@ else:
     print(mf_resp.error.message)
 
 """You can get channel information by entering the channel ID and user token"""
-mf_resp = mfsdk.channels.get(token="<token>", channel_id="<channel_id>")
+mf_resp = mfsdk.channels.get(token= token, channel_id=channel_id)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -375,7 +384,7 @@ else:
 """You can get all channels in the database by calling the get_all ()
 function"""
 mf_resp = mfsdk.channels.get_all(
-    query_params={"offset": 0, "limit": 5}, token="<token>"
+    query_params={"offset": 0, "limit": 5}, token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -384,8 +393,8 @@ else:
 
 """A list of all the channels to which a given thing is connected"""
 mf_resp = mfsdk.channels.get_by_thing(
-    thing_id="<thing_id>", query_params={"offset": 0, "limit": 5},
-    token="<token>"
+    thing_id=thing_id, query_params={"offset": 0, "limit": 5},
+    token= token
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -401,7 +410,7 @@ else:
 
 """Delete channels from the database"""
 mf_resp = mfsdk.channels.disable(
-    channel_id="<channel_id>", token="<token>")
+    channel_id=channel_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -409,14 +418,14 @@ else:
 
 """To create a group, you need the group name and a user token"""
 mf_resp = mfsdk.groups.create(
-    group={"name": "group_name"}, token="<token>")
+    group={"name": "group_name"}, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
 """You can get group information by entering the group ID and token"""
-mf_resp = mfsdk.groups.get(group_id="<group_id>", token="<token>")
+mf_resp = mfsdk.groups.get(group_id= group_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -424,14 +433,14 @@ else:
 
 """Group update"""
 group={
-    "id": "<group_id>",
+    "id": group_id,
     "name": "<group_name>",
     "metdata": {
         "foo": "bar"
     }
  }
 mf_resp = mfsdk.groups.update(
-    token="<token>", group= group, group_id="group_id"
+    token= token, group= group, group_id="group_id"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -440,7 +449,7 @@ else:
 
 """You can get groups in the database by calling the get_all () function"""
 mf_resp = mfsdk.groups.get_all(
-    token="<token>", query_params={"offset": 0, "limit": 5}
+    token= token, query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -449,8 +458,8 @@ else:
 
 """Assign user to a group"""
 mf_resp = mfsdk.groups.assign(
-    group_id="<group_id>",
-    token="<token>",
+    group_id=group_id,
+    token= token,
     member_id="<member_id>",
     member_type=["<member_type>"],
 )
@@ -462,7 +471,7 @@ else:
 """Unassign"""
 mf_resp = mfsdk.groups.unassign(
     group_id="<object>",
-    token="<token>",
+    token= token,
     members_ids="<subject>",
 )
 if mf_resp.error.status == 0:
@@ -472,7 +481,7 @@ else:
 
 """Get list of children from group"""
 mf_resp = mfsdk.groups.children(
-    group_id="<group_id>", token="<token>",
+    group_id=group_id, token= token,
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -482,7 +491,7 @@ else:
 
 """Get list of parents from group"""
 mf_resp = mfsdk.groups.parents(
-    group_id="<group_id>", token="<token>",
+    group_id=group_id, token= token,
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -492,7 +501,7 @@ else:
 
 """Get list of members from group"""
 mf_resp = mfsdk.groups.members(
-    group_id="<group_id>", token="<token>",
+    group_id=group_id, token= token,
     query_params={"offset": 0, "limit": 5}
 )
 if mf_resp.error.status == 0:
@@ -503,7 +512,7 @@ else:
 """Get list of memberships from member"""
 mf_resp = mfsdk.groups.memberships(
     member_id="<member_id>",
-    token="<token>",
+    token= token,
     query_params={"offset": 0, "limit": 5},
 )
 if mf_resp.error.status == 0:
@@ -512,7 +521,7 @@ else:
     print(mf_resp.error.message)
 
 """Delete group from the database"""
-mf_resp = mfsdk.groups.disable(group_id="<group_id>", user_token="<token>")
+mf_resp = mfsdk.groups.disable(group_id=group_id, user_token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -520,7 +529,7 @@ else:
 
 """Sends message via HTTP protocol"""
 mf_resp = mfsdk.messages.send(
-    channel_id="<channel_id>", msg='<[message]>', thing_key="<thing_secret>"
+    channel_id=channel_id, msg='[<message>]', thing_key="<thing_secret>"
 )
 if mf_resp.error.status == 0:
     print(mf_resp.value)
@@ -528,35 +537,35 @@ else:
     print(mf_resp.error.message)
 
 """Reads messages from database for a given channel"""
-mf_resp = mfsdk.messages.read(channel_id="<channel_id>", token="<token>")
+mf_resp = mfsdk.messages.read(channel_id=channel_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
 """Issue certs"""
-mf_resp = mfsdk.certs.issue(thing_id="<thing_id>",valid="<time_limit>", token="<token>")
+mf_resp = mfsdk.certs.issue(thing_id=thing_id,valid="<time_limit>", token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
  
 """View Certs"""
-mf_resp = mfsdk.certs.view_by_thing(thing_id="<thing_id>", token="<token>")
+mf_resp = mfsdk.certs.view_by_thing(thing_id=thing_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
     
 """View Certs"""
-mf_resp = mfsdk.certs.view_by_serial(cert_id="<cert_id>", token="<token>")
+mf_resp = mfsdk.certs.view_by_serial(cert_id="<cert_id>", token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
 
 """Revoke Certs"""
-mf_resp = mfsdk.certs.revoke(thing_id="<thing_id>", token="<token>")
+mf_resp = mfsdk.certs.revoke(thing_id=thing_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -566,30 +575,30 @@ else:
 config = {
    "external_id": "<external_id>",
   "external_key": "<external_key>",
-  "thing_id": "<thing_id>",
+  "thing_id": thing_id,
   "name": "<name>"
 }
-mf_resp = mfsdk.bootstrap.add(config=config, token="<token>")
+mf_resp = mfsdk.bootstrap.add(config=config, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message)
-    
+
 """Updating state represents enabling/disabling Config, i.e.connecting and disconnecting corresponding Mainflux Thing to the list of Channels."""
 config = {
    "external_id": "<external_id>",
   "external_key": "<external_key>",
-  "thing_id": "<thing_id>",
+  "thing_id": thing_id,
   "name": "<name>"
 }
-mf_resp = mfsdk.bootstrap.whitelist(config=config, token="<token>")
+mf_resp = mfsdk.bootstrap.whitelist(config=config, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
     print(mf_resp.error.message) 
  
 """Retrieves a configuration with given config id"""
-mf_resp = mfsdk.bootstrap.view(thing_id= "<thing_id>", token="<token>")
+mf_resp = mfsdk.bootstrap.view(thing_id= thing_id, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -599,10 +608,10 @@ else:
 config = {
  "external_id": "<external_id>",
   "external_key": "<external_key>",
-  "thing_id": "<thing_id>",
+  "thing_id": thing_id,
   "name": "<name>"
 }
-mf_resp = mfsdk.bootstrap.update(config=config, token="<token>")
+mf_resp = mfsdk.bootstrap.update(config=config, token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
@@ -616,7 +625,7 @@ else:
     print(mf_resp.error.message)
 
 """Removes a Config. In case of successful removal the service will ensure that the removed config is disconnected from all the Mainflux channels."""
-mf_resp = mfsdk.bootstrap.remove(config_id= "<config_id>", token="<token>")
+mf_resp = mfsdk.bootstrap.remove(config_id= "<config_id>", token= token)
 if mf_resp.error.status == 0:
     print(mf_resp.value)
 else:
