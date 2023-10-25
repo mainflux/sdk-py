@@ -14,16 +14,16 @@ mfsdk = sdk.SDK(
 
 """Repetitive values that can be easily fed into the example code"""
 
-user_id =  "<user_id>",
-token =  "<access_token>",
-thing_id = "<thing_id>",
-channel_id = "<channel_id>",
-group_id = "<group_id>",
-thing_id2 = "<thing_id2>",
 email = "<email>",
 password = "<password>",
+user_id =  "<user_id>",
+token =  "<access_token>",
 refresh_token = "<refresh_token>",
+thing_id = "<thing_id>",
+thing_id2 = "<thing_id2>",
+channel_id = "<channel_id>",
 channel_id2 = "<channel_id2>",
+group_id = "<group_id>",
 
 """To start working with the Mainflux system,
 you need to create a user account"""
