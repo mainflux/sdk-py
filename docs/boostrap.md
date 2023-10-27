@@ -22,11 +22,11 @@ Bootstrap service is used to manage configurations for Mainflux Things. It provi
 
 **Attributes:**
  
- - **`url`** (str):  Mainflux Bootstrap API URL. 
- - **`CONFIGS_ENDPOINT`** (str):  Configurations API endpoint. 
- - **`BOOTSTRAP_ENDPOINT`** (str):  Bootstrap API endpoint. 
- - **`WHITELIST_ENDPOINT`** (str):  Whitelist API endpoint. 
- - **`BOOTSTRAP_CERTS_ENDPOINT`** (str):  Bootstrap certificates API endpoint. 
+ - <b>`url`</b> (str):  Mainflux Bootstrap API URL. 
+ - <b>`CONFIGS_ENDPOINT`</b> (str):  Configurations API endpoint. 
+ - <b>`BOOTSTRAP_ENDPOINT`</b> (str):  Bootstrap API endpoint. 
+ - <b>`WHITELIST_ENDPOINT`</b> (str):  Whitelist API endpoint. 
+ - <b>`BOOTSTRAP_CERTS_ENDPOINT`</b> (str):  Bootstrap certificates API endpoint. 
 
 
 
@@ -46,7 +46,7 @@ params:  url (str): Mainflux Bootstrap API URL.
 
 **returns:**
  
- - **`Bootstrap`**:  Bootstrap object. 
+ - <b>`Bootstrap`</b>:  Bootstrap object. 
 
 
 
@@ -76,22 +76,22 @@ params:  config (dict): Configuration data for example:   {    "external_id": "1
 
 **returns:**
  
- - **`mf_response `**:  response.Response. 
+ - <b>`mf_response `</b>:  response.Response. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> config = {
 
- - **`    ... "external_id"`**:  "123",
+ - <b>`    ... "external_id"`</b>:  "123",
 
- - **`    ... "external_key"`**:  "456",
+ - <b>`    ... "external_key"`</b>:  "456",
 
- - **`    ... "thing_id"`**:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
+ - <b>`    ... "thing_id"`</b>:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
 
- - **`    ... "name"`**:  "thing_name"
+ - <b>`    ... "name"`</b>:  "thing_name"
     ... }
     >>> mf_resp = mfsdk.bootstrap.add(config, token)
     >>> mf_resp
@@ -115,13 +115,13 @@ params:  external_id (str): External ID.  external_key (str): External key.
 
 **returns:**
  
- - **`mf_resp `**:  response.Response - response object. 
+ - <b>`mf_resp `</b>:  response.Response - response object. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> external_id = "external_id"
     >>> external_key = "external_key"
     >>> mf_resp = mfsdk.bootstrap.bootstrap(external_id, external_key)
@@ -146,13 +146,13 @@ params:  config_id (str): Configuration ID.  token (str): Authorization token.
 
 **returns:**
  
- - **`mf_response `**:  response.Response. 
+ - <b>`mf_response `</b>:  response.Response. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> config_id = "config_id"
     >>> mf_resp = mfsdk.bootstrap.remove(config_id, token)
     >>> mf_resp
@@ -178,22 +178,22 @@ params:  config (dict): Configuration data for example:   {    "external_id": "1
  
 
 
- - **`mf_response `**:  response.Response. 
+ - <b>`mf_response `</b>:  response.Response. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> config = {
 
- - **`    ... "external_id"`**:  "123",
+ - <b>`    ... "external_id"`</b>:  "123",
 
- - **`    ... "external_key"`**:  "456",
+ - <b>`    ... "external_key"`</b>:  "456",
 
- - **`    ... "thing_id"`**:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
+ - <b>`    ... "thing_id"`</b>:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
 
- - **`    ... "name"`**:  "thing_name"
+ - <b>`    ... "name"`</b>:  "thing_name"
     ... }
     >>> mf_resp = mfsdk.bootstrap.update(config, token)
     >>> mf_resp
@@ -223,13 +223,13 @@ params:   config_id (str): Configuration ID.  client_cert (str): Client certific
 
 **returns:**
  
- - **`mf_response `**:  response.Response. 
+ - <b>`mf_response `</b>:  response.Response. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> config_id = "config_id"
     >>> client_cert = "client_cert"
     >>> client_key = "client_key"
@@ -258,13 +258,13 @@ params:  thing_id (str): Thing ID.  token (str): Authorization token.
 
 **returns:**
  
- - **`mf_resp `**:  response.Response - response object. 
+ - <b>`mf_resp `</b>:  response.Response - response object. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> thing_id = "thing_id"
     >>> mf_resp = mfsdk.bootstrap.view(thing_id, token)
     >>> mf_resp
@@ -288,22 +288,22 @@ params:  config (dict): Configuration data for example:   {    "external_id": "1
 
 **returns:**
  
- - **`mf_response `**:  response.Response. 
+ - <b>`mf_response `</b>:  response.Response. 
 
 Usage: 
 
 ``` from mainflux import sdk```
 
- - **`    >>> mfsdk = sdk.SDK(bootstrap_url="http`**: //localhost:9013")
+ - <b>`    >>> mfsdk = sdk.SDK(bootstrap_url="http`</b>: //localhost:9013")
     >>> config = {
 
- - **`    ... "external_id"`**:  "123",
+ - <b>`    ... "external_id"`</b>:  "123",
 
- - **`    ... "external_key"`**:  "456",
+ - <b>`    ... "external_key"`</b>:  "456",
 
- - **`    ... "thing_id"`**:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
+ - <b>`    ... "thing_id"`</b>:  "fdb1057c-2905-4f71-9a80-e0ce9191e667",
 
- - **`    ... "name"`**:  "thing_name"
+ - <b>`    ... "name"`</b>:  "thing_name"
     ... }
     >>> mf_resp = mfsdk.bootstrap.whitelist(config, token)
     >>> mf_resp        
