@@ -53,7 +53,7 @@ Official documentation for the SDK is hosted at [here](https://github.com/mainfl
 ```sh
 pip install lazydocs requests
 python3 setup.py install
-lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" lib
+lazydocs --src-base-url="https://github.com/mainflux/sdk-py/blob/main/" --overview-file="README.md" mainflux
 ```
 
 Please note that lazydocs requires Python version 3.5 or higher.
